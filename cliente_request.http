@@ -1,0 +1,14 @@
+### CADASTRA CLIENTE ###
+POST http://localhost:8080/lanchonete/v1/clientes
+Accept: application/json
+Content-Type: application/json
+
+{
+  "nome": "Fulano da Silva",
+  "cpf": "12345678902",
+  "email": "fulano.silva@email.com.br"
+}
+
+### BUSCA CLIENTE POR CPF ###
+GET http://localhost:8080/lanchonete/v1/clientes/cpf/12345678901
+Accept: application/json

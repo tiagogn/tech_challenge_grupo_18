@@ -1,0 +1,26 @@
+services:
+  dozzle:
+    container_name: dozzle_lanchonete
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+  lanchonete:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:16
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=lanchonete_user
+      - POSTGRES_PASSWORD=lanchonete_password
+      - POSTGRES_DB=lanchonete
