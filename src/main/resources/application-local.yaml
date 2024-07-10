@@ -1,5 +1,5 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/lanchonete
+    url: jdbc:postgresql://localhost:5432/lanchonete
     username: lanchonete_user
     password: lanchonete_password

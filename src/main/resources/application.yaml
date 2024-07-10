@@ -1,18 +1,17 @@
 spring:
+  profiles:
+    active: ${springProfile:local}
   application:
     name: lanchonete
-    datasource:
-      url: jdbc:postgresql://localhost:5432/lanchonete
-      username: lanchonete_user
-      password: lanchonete_password
-      driver-class-name: org.postgresql.Driver
-    jpa:
-        hibernate:
-            ddl-auto: update
-        show-sql: false
-        database-platform: org.hibernate.dialect.PostgreSQL94Dialect
-    flyway:
-        enabled: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
 server:
   servlet:
     context-path: /lanchonete
