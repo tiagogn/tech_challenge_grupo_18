@@ -1,10 +1,10 @@
-package br.com.fiap.lanchonete.service
+package br.com.fiap.lanchonete.core.application.services
 
-import br.com.fiap.lanchonete.domain.Produto
-import br.com.fiap.lanchonete.exceptions.ResourceNotFoundException
-import br.com.fiap.lanchonete.repository.ProdutoRepository
+import br.com.fiap.lanchonete.core.application.ports.inputs.ProdutoService
+import br.com.fiap.lanchonete.core.domain.entities.Produto
+import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
+import br.com.fiap.lanchonete.core.domain.repository.ProdutoRepository
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import org.springframework.stereotype.Service
 import java.util.*
 

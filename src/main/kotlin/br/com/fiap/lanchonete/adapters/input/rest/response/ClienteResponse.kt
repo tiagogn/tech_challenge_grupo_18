@@ -1,4 +1,4 @@
-package br.com.fiap.lanchonete.controller.response
+package br.com.fiap.lanchonete.adapters.input.rest.response
 
 data class ClienteResponse(
     val identificador: String,

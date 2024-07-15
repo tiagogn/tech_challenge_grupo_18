@@ -1,6 +1,6 @@
-package br.com.fiap.lanchonete.service
+package br.com.fiap.lanchonete.core.application.ports.inputs
 
-import br.com.fiap.lanchonete.domain.Produto
+import br.com.fiap.lanchonete.core.domain.entities.Produto
 import java.util.*
 
 interface ProdutoService {

@@ -1,6 +1,6 @@
-package br.com.fiap.lanchonete.controller.request
+package br.com.fiap.lanchonete.adapters.input.rest.request
 
-import br.com.fiap.lanchonete.domain.Cliente
+import br.com.fiap.lanchonete.core.domain.entities.Cliente
 import java.util.*
 
 data class ClienteRequest(

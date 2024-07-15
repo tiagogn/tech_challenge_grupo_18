@@ -1,6 +1,6 @@
-package br.com.fiap.lanchonete.service
+package br.com.fiap.lanchonete.core.application.ports.inputs
 
-import br.com.fiap.lanchonete.domain.Cliente
+import br.com.fiap.lanchonete.core.domain.entities.Cliente
 
 interface ClienteService {
     fun cadastrarCliente(cliente: Cliente): Cliente

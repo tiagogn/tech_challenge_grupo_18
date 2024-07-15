@@ -1,7 +1,7 @@
-package br.com.fiap.lanchonete.controller.request
+package br.com.fiap.lanchonete.adapters.input.rest.request
 
-import br.com.fiap.lanchonete.domain.Produto
-import br.com.fiap.lanchonete.domain.Produto.Categoria
+import br.com.fiap.lanchonete.core.domain.entities.Produto
+import br.com.fiap.lanchonete.core.domain.entities.Produto.Categoria
 import java.math.BigDecimal
 import java.util.UUID
 

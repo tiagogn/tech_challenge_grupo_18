@@ -1,6 +1,6 @@
-package br.com.fiap.lanchonete.repository
+package br.com.fiap.lanchonete.core.domain.repository
 
-import br.com.fiap.lanchonete.domain.Cliente
+import br.com.fiap.lanchonete.core.domain.entities.Cliente
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository

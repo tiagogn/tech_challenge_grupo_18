@@ -1,10 +1,10 @@
-package br.com.fiap.lanchonete.controller
+package br.com.fiap.lanchonete.adapters.input.rest
 
-import br.com.fiap.lanchonete.controller.request.ProdutoRequest
-import br.com.fiap.lanchonete.controller.request.toModel
-import br.com.fiap.lanchonete.controller.request.toUpdate
-import br.com.fiap.lanchonete.controller.response.ProdutoResponse
-import br.com.fiap.lanchonete.service.ProdutoService
+import br.com.fiap.lanchonete.adapters.input.rest.request.ProdutoRequest
+import br.com.fiap.lanchonete.adapters.input.rest.request.toModel
+import br.com.fiap.lanchonete.adapters.input.rest.request.toUpdate
+import br.com.fiap.lanchonete.adapters.input.rest.response.ProdutoResponse
+import br.com.fiap.lanchonete.core.application.ports.inputs.ProdutoService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable

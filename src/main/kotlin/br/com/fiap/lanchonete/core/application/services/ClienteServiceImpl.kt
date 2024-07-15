@@ -1,8 +1,9 @@
-package br.com.fiap.lanchonete.service
+package br.com.fiap.lanchonete.core.application.services
 
-import br.com.fiap.lanchonete.domain.Cliente
-import br.com.fiap.lanchonete.exceptions.ResourceNotFoundException
-import br.com.fiap.lanchonete.repository.ClienteRepository
+import br.com.fiap.lanchonete.core.application.ports.inputs.ClienteService
+import br.com.fiap.lanchonete.core.domain.entities.Cliente
+import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
+import br.com.fiap.lanchonete.core.domain.repository.ClienteRepository
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 

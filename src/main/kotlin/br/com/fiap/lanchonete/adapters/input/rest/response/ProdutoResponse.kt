@@ -1,6 +1,6 @@
-package br.com.fiap.lanchonete.controller.response
+package br.com.fiap.lanchonete.adapters.input.rest.response
 
-import br.com.fiap.lanchonete.domain.Produto.Categoria
+import br.com.fiap.lanchonete.core.domain.entities.Produto.Categoria
 import java.math.BigDecimal
 
 data class ProdutoResponse(
