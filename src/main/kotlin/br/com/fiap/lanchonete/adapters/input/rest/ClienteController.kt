@@ -2,7 +2,7 @@ package br.com.fiap.lanchonete.adapters.input.rest
 
 import br.com.fiap.lanchonete.adapters.input.rest.request.ClienteRequest
 import br.com.fiap.lanchonete.adapters.input.rest.response.ClienteResponse
-import br.com.fiap.lanchonete.core.application.ports.inputs.ClienteService
+import br.com.fiap.lanchonete.core.application.ports.input.ClienteService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping

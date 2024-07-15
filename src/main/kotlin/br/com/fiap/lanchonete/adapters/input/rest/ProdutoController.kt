@@ -4,7 +4,7 @@ import br.com.fiap.lanchonete.adapters.input.rest.request.ProdutoRequest
 import br.com.fiap.lanchonete.adapters.input.rest.request.toModel
 import br.com.fiap.lanchonete.adapters.input.rest.request.toUpdate
 import br.com.fiap.lanchonete.adapters.input.rest.response.ProdutoResponse
-import br.com.fiap.lanchonete.core.application.ports.inputs.ProdutoService
+import br.com.fiap.lanchonete.core.application.ports.input.ProdutoService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable

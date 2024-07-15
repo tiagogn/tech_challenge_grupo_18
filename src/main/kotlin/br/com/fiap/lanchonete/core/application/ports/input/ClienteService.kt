@@ -1,4 +1,4 @@
-package br.com.fiap.lanchonete.core.application.ports.inputs
+package br.com.fiap.lanchonete.core.application.ports.input
 
 import br.com.fiap.lanchonete.core.domain.entities.Cliente
 

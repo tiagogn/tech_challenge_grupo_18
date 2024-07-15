@@ -1,6 +1,6 @@
 package br.com.fiap.lanchonete.core.application.services
 
-import br.com.fiap.lanchonete.core.application.ports.inputs.ClienteService
+import br.com.fiap.lanchonete.core.application.ports.input.ClienteService
 import br.com.fiap.lanchonete.core.domain.entities.Cliente
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
 import br.com.fiap.lanchonete.core.domain.repository.ClienteRepository

@@ -1,6 +1,6 @@
 package br.com.fiap.lanchonete.core.application.services
 
-import br.com.fiap.lanchonete.core.application.ports.inputs.ProdutoService
+import br.com.fiap.lanchonete.core.application.ports.input.ProdutoService
 import br.com.fiap.lanchonete.core.domain.entities.Produto
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
 import br.com.fiap.lanchonete.core.domain.repository.ProdutoRepository
