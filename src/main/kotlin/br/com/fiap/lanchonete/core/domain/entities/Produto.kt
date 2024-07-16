@@ -1,8 +1,6 @@
 package br.com.fiap.lanchonete.core.domain.entities
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
+import jakarta.persistence.*
 import java.math.BigDecimal
 import java.util.UUID
 
@@ -13,6 +11,7 @@ data class Produto(
     val id: UUID,
     val nome: String,
     val preco: BigDecimal,
+   @Enumerated(EnumType.STRING)
     val categoria: Categoria
 ) {
     enum class Categoria {
