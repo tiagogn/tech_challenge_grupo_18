@@ -7,4 +7,5 @@ interface ProdutoService {
     fun cadastrarProduto(produto: Produto): Produto
     fun atualizarProduto(produto: Produto): Produto
     fun deletarProduto(id: UUID)
+    fun findByCategoria(categoria: String): List<Produto>
 }

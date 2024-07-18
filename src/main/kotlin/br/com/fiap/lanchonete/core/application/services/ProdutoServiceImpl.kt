@@ -29,4 +29,10 @@ class ProdutoServiceImpl(
             .orElseThrow { ResourceNotFoundException("Produto não encontrado") }
         produtoRepository.delete(produto)
     }
+
+    override fun findByCategoria(categoria: String): List<Produto> {
+        return produtoRepository.findByCategoria(categoria);
+
+    }
+
 }
