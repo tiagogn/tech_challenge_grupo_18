@@ -13,8 +13,10 @@ data class PedidoResponse(
     val total: BigDecimal,
     val status: Pedido.StatusPedido,
     val criadoEm: LocalDateTime,
-    val atualizadoEm: LocalDateTime
+    val atualizadoEm: LocalDateTime,
+    val tempoEspera: String
 )
+
 
 data class ItemPedidoResponse(
     var id: UUID?,
@@ -31,7 +33,8 @@ fun Pedido.toResponse(): PedidoResponse {
         total = this.total,
         status = this.status,
         criadoEm = this.criadoEm,
-        atualizadoEm = this.atualizadoEm
+        atualizadoEm = this.atualizadoEm,
+        tempoEspera = this.tempoEspera
     )
 }
 

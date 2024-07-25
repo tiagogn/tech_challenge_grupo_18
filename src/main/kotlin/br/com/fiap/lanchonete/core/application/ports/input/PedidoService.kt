@@ -8,4 +8,6 @@ interface PedidoService {
     fun criarPedido(clienteId: UUID?, itens: List<ItemPedido>): Pedido
     fun atualizarStatusPedido(pedidoId: UUID, novoStatus: Pedido.StatusPedido): Pedido
     fun listarPedidosNaFila(): List<Pedido>
+    fun historicoPedido(pedidoId: UUID): Pedido
+    fun tempoEspera (pedidoId: UUID): String
 }

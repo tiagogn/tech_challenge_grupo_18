@@ -38,3 +38,7 @@ fun ItemPedidoRequest.toModel(): ItemPedido {
 data class AtualizarStatusRequest(
     val novoStatus: Pedido.StatusPedido
 )
+
+data class historicoPedido(
+    val idPedido: Pedido
+)

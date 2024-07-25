@@ -1,7 +1,6 @@
 package br.com.fiap.lanchonete.core.domain.entities
 
 import jakarta.persistence.CascadeType
-import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -13,6 +12,7 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import java.math.BigDecimal
+import java.time.Duration
 import java.time.LocalDateTime
 import java.util.*
 
@@ -38,7 +38,14 @@ data class Pedido(
 
     val criadoEm: LocalDateTime = LocalDateTime.now(),
 
-    val atualizadoEm: LocalDateTime = LocalDateTime.now()
+    val atualizadoEm: LocalDateTime = LocalDateTime.now(),
+
+    val prontoEm: LocalDateTime = LocalDateTime.now(),
+
+    val finalizadoEm: LocalDateTime = LocalDateTime.now(),
+
+    val tempoEspera: String
+
 ) {
     enum class StatusPedido {
         RECEBIDO,

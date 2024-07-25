@@ -3,13 +3,17 @@ package br.com.fiap.lanchonete.adapters.input.rest
 import br.com.fiap.lanchonete.adapters.input.rest.request.AtualizarStatusRequest
 import br.com.fiap.lanchonete.adapters.input.rest.request.PedidoRequest
 import br.com.fiap.lanchonete.adapters.input.rest.request.toModel
+import br.com.fiap.lanchonete.adapters.input.rest.response.ItemPedidoResponse
 import br.com.fiap.lanchonete.adapters.input.rest.response.PedidoResponse
+import br.com.fiap.lanchonete.adapters.input.rest.response.ProdutoResponse
 import br.com.fiap.lanchonete.adapters.input.rest.response.toResponse
 import br.com.fiap.lanchonete.core.application.ports.input.PedidoService
 import br.com.fiap.lanchonete.core.domain.entities.Pedido
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.math.BigDecimal
+import java.time.LocalDateTime
 import java.util.*
 
 @RestController
@@ -45,4 +49,19 @@ class PedidoController(
         val pedidosNaFila = pedidoService.listarPedidosNaFila()
         return ResponseEntity.status(HttpStatus.OK).body(pedidosNaFila.map { it.toResponse() })
     }
+    @GetMapping("/{pedidoId}")
+    fun historicoPedido(@PathVariable pedidoId: UUID): PedidoResponse {
+        val pedido = pedidoService.historicoPedido(pedidoId)
+        return PedidoResponse(
+            id = pedido.id,
+            cliente = pedido.cliente?.toResponse(),
+            itens = pedido.itens.map { it.toResponse() },
+            total = pedido.total,
+            status = pedido.status,
+            criadoEm = pedido.criadoEm,
+            atualizadoEm = pedido.atualizadoEm,
+            tempoEspera = pedido.tempoEspera
+            )
+    }
+
 }

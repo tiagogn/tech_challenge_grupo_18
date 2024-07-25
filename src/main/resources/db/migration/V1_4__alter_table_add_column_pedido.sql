@@ -1,0 +1,2 @@
+ALTER TABLE pedido ADD pronto_em TIMESTAMP NOT NULL;
+ALTER TABLE pedido ADD finalizado_em TIMESTAMP NOT NULL;
