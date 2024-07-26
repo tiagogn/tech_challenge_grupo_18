@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "5925332a-4eb4-4adf-8175-ac51a7ca858c",
+		"name": "Tech Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4594036"
+	},
+	"item": [
+		{
+			"name": "Buscar Cliente",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lanchonete/v1/clientes/cpf/12345678901",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lanchonete",
+						"v1",
+						"clientes",
+						"cpf",
+						"12345678901"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"cpf\": \"12345678902\",\r\n  \"email\": \"fulano.silva@email.com.br\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lanchonete/v1/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lanchonete",
+						"v1",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Produto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"\",\r\n    \"preco\": \"20\",\r\n    \"categoria\":\"BEBIDA\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lanchonete/v1/produtos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lanchonete",
+						"v1",
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar por Categoria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/lanchonete/v1/produtos/categoria/ACOMPANHAMENTO",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lanchonete",
+						"v1",
+						"produtos",
+						"categoria",
+						"ACOMPANHAMENTO"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "criarPedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clienteId\":\"b74ac07d-0e7b-4b39-b046-3045547878b0\",\r\n    \"itens\": [\r\n        {\r\n        \"produtoId\":\"3424c401-b20b-45d0-ac94-94570bc990f7\",\r\n        \"nomeProduto\":\"coca\",\r\n        \"quantidade\": 1,\r\n        \"precoUnitario\": 10,\r\n        \"categoria\":\"BEBIDA\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lanchonete/api/pedidos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lanchonete",
+						"api",
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Pedido",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"novoStatus\": \"PRONTO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lanchonete/api/pedidos/7f8fc558-e6c1-4710-9468-7dd02c42ba56/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lanchonete",
+						"api",
+						"pedidos",
+						"7f8fc558-e6c1-4710-9468-7dd02c42ba56",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Pedido",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lanchonete/api/pedidos/fila",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lanchonete",
+						"api",
+						"pedidos",
+						"fila"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checkout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lanchonete/api/pedidos/7f8fc558-e6c1-4710-9468-7dd02c42ba56/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lanchonete",
+						"api",
+						"pedidos",
+						"7f8fc558-e6c1-4710-9468-7dd02c42ba56",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Historico Pedido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/lanchonete/api/pedidos/51c3bee4-8466-4ae0-9e25-1fa739f8eb1a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lanchonete",
+						"api",
+						"pedidos",
+						"51c3bee4-8466-4ae0-9e25-1fa739f8eb1a"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
