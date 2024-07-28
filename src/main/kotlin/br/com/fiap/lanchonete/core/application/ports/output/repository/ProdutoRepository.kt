@@ -6,7 +6,7 @@ import java.util.*
 
 interface ProdutoRepository {
     fun findByCategoria(categoriaProduto: CategoriaProduto): List<Produto>
-    abstract fun save(produto: Produto): Produto
+    fun save(produto: Produto): Produto
     fun findById(id: UUID): Optional<Produto>
-    abstract fun delete(produto: Produto)
+    fun delete(produto: Produto)
 }

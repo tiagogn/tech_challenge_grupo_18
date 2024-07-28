@@ -32,7 +32,7 @@ class ProdutoServiceImpl(
     }
 
     override fun findByCategoria(categoriaProduto: CategoriaProduto): List<Produto> {
-        return produtoRepository.findByCategoria(categoriaProduto);
+        return produtoRepository.findByCategoria(categoriaProduto)
 
     }
 
