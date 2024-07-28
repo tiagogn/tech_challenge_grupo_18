@@ -19,7 +19,7 @@ class ProdutoServiceImpl(
     }
 
     override fun atualizarProduto(produto: Produto): Produto {
-        produtoRepository.findById(produto.id)
+        produtoRepository.findById(produto.id!!)
             .orElseThrow { ResourceNotFoundException("Produto não encontrado") }
         return produtoRepository.save(produto)
     }

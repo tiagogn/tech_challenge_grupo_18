@@ -6,6 +6,7 @@ import java.math.BigDecimal
 import java.util.UUID
 
 data class ProdutoRequest(
+    var id: UUID? = null,
     val nome: String,
     val preco: BigDecimal,
     val categoria: Categoria
@@ -13,7 +14,7 @@ data class ProdutoRequest(
 
 fun ProdutoRequest.toModel(): Produto {
     return Produto(
-        id = UUID.randomUUID(),
+        id = this.id,
         nome = this.nome,
         preco = this.preco,
         categoria = this.categoria
