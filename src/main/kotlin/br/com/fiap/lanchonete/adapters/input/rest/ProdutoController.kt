@@ -5,6 +5,7 @@ import br.com.fiap.lanchonete.adapters.input.rest.request.toModel
 import br.com.fiap.lanchonete.adapters.input.rest.request.toUpdate
 import br.com.fiap.lanchonete.adapters.input.rest.response.ProdutoResponse
 import br.com.fiap.lanchonete.core.application.ports.input.ProdutoService
+import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -23,18 +24,19 @@ class ProdutoController(
             id = produto.id.toString(),
             nome = produto.nome,
             preco = produto.preco,
-            categoria = produto.categoria
+            categoriaProduto = produto.categoria
         )
     }
-    @GetMapping ("/categoria/{categoria}")
+
+    @GetMapping("")
     @ResponseBody
-    fun buscarProdutoporCategoria(@PathVariable categoria: String): ResponseEntity<List<ProdutoResponse>> {
+    fun buscarProdutoporCategoria(@RequestParam(required = true) categoria: CategoriaProduto): ResponseEntity<List<ProdutoResponse>> {
         val produtos = produtoService.findByCategoria(categoria).map { produto ->
             ProdutoResponse(
                 id = produto.id.toString(),
                 nome = produto.nome,
                 preco = produto.preco,
-                categoria = produto.categoria
+                categoriaProduto = produto.categoria
             )
         }
         return if (produtos.isEmpty()) {
@@ -54,7 +56,7 @@ class ProdutoController(
             id = produto.id.toString(),
             nome = produto.nome,
             preco = produto.preco,
-            categoria = produto.categoria
+            categoriaProduto = produto.categoria
         )
     }
 

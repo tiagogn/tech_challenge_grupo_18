@@ -1,6 +1,6 @@
 package br.com.fiap.lanchonete.adapters.output.gateway
 
-import br.com.fiap.lanchonete.core.application.ports.output.PagamentoGateway
+import br.com.fiap.lanchonete.core.application.ports.output.gateway.PagamentoGateway
 import br.com.fiap.lanchonete.core.domain.entities.FormaPagamento
 import br.com.fiap.lanchonete.core.domain.entities.Pagamento
 import br.com.fiap.lanchonete.core.domain.entities.StatusPagamento

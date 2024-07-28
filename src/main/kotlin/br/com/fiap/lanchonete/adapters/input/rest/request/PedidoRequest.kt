@@ -1,5 +1,6 @@
 package br.com.fiap.lanchonete.adapters.input.rest.request
 
+import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
 import br.com.fiap.lanchonete.core.domain.entities.Produto
 import java.math.BigDecimal
@@ -25,7 +26,7 @@ fun ItemPedidoRequest.toModel(): ItemPedido {
             id = this.produtoId,
             nome = this.nomeProduto,
             preco = this.precoUnitario,
-            categoria = Produto.Categoria.valueOf(this.categoria)
+            categoria = CategoriaProduto.valueOf(this.categoria)
         ),
         nomeProduto = this.nomeProduto,
         quantidade = this.quantidade,
