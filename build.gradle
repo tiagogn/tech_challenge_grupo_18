@@ -9,6 +9,10 @@ plugins {
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
+ext {
+    springdocVersion = "2.3.0"
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
@@ -29,6 +33,9 @@ dependencies {
     implementation 'org.flywaydb:flyway-core:10.15.2'
     implementation 'io.github.microutils:kotlin-logging-jvm:3.0.5'
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.7'
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
+    implementation "org.springdoc:springdoc-openapi-starter-common:${springdocVersion}"
     //developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'

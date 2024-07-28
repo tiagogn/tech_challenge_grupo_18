@@ -2,7 +2,6 @@ https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-wr
 
 https://readme.so/pt/editor
 
-
 # Projeto da lanchonete Grupo 18 Pós-Tech - FIAP
 
 O objetivo do projeto é disponibilizar APIs para os seguintes serviços da lanchonete:
@@ -10,9 +9,9 @@ O objetivo do projeto é disponibilizar APIs para os seguintes serviços da lanc
 - cadastro de cliente
 - identificação do cliente via CPF
 - criar, editar e remover produtos
-- buscar produtos por categoria 
+- buscar produtos por categoria
 - Fake checkout, apenas enviar os produtos escolhidos para a fila. O checkout é a finalização do pedido.
-- listar pedidos 
+- listar pedidos
 
 O propjeto foi desenvolvido utilizando as seguintes tecnologias:
 
@@ -24,9 +23,10 @@ O propjeto foi desenvolvido utilizando as seguintes tecnologias:
 ## Executando o projeto localmente
 
 Baixe o projeto no seguinte endereço:
+
 - https://github.com/tiagogn/tech_challenge_grupo_18
 
-em seguinte, dentro da pasta do projeto execute o comando 
+em seguinte, dentro da pasta do projeto execute o comando
 
 ```idea .```
 
@@ -37,3 +37,7 @@ Para rodar o projeto através do Docker Compose, utilize o seguinte comando:
 ```
 docker-compose -f docker-compose.yaml up -d
 ```
+
+## Swagger
+
+* API (http://localhost:8080/lanchonete/swagger-ui/index.html)
