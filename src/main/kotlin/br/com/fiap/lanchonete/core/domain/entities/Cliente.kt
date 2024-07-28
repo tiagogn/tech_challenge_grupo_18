@@ -12,8 +12,7 @@ data class Cliente(
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
-    var identificador: UUID? = null,
+    var id: UUID? = null,
 
     val nome: String,
 
