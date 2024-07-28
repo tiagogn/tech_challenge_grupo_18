@@ -24,7 +24,7 @@ class ProdutoController(
             id = produto.id.toString(),
             nome = produto.nome,
             preco = produto.preco,
-            categoriaProduto = produto.categoria
+            categoria = produto.categoria
         )
     }
 
@@ -36,7 +36,7 @@ class ProdutoController(
                 id = produto.id.toString(),
                 nome = produto.nome,
                 preco = produto.preco,
-                categoriaProduto = produto.categoria
+                categoria = produto.categoria
             )
         }
         return if (produtos.isEmpty()) {
@@ -56,7 +56,7 @@ class ProdutoController(
             id = produto.id.toString(),
             nome = produto.nome,
             preco = produto.preco,
-            categoriaProduto = produto.categoria
+            categoria = produto.categoria
         )
     }
 

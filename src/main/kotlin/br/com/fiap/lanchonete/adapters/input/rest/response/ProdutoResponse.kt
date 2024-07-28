@@ -7,5 +7,5 @@ data class ProdutoResponse(
     val id: String,
     val nome: String,
     val preco: BigDecimal,
-    val categoriaProduto: CategoriaProduto
+    val categoria: CategoriaProduto
 )

@@ -17,6 +17,10 @@ class PagamentoGatewayImpl : PagamentoGateway {
             return pagamento
         }
 
+        if (pagamento.valor < pagamento.pedido.total) {
+            throw Exception("Valor do pagamento menor que o total do pedido")
+        }
+
         pagamento.status = StatusPagamento.APROVADO
         pagamento.transactionId = java.util.UUID.randomUUID()
         pagamento.dataPagamento = java.time.LocalDateTime.now()

@@ -9,7 +9,7 @@ data class ProdutoRequest(
     var id: UUID? = null,
     val nome: String,
     val preco: BigDecimal,
-    val categoriaProduto: CategoriaProduto
+    val categoria: CategoriaProduto
 )
 
 fun ProdutoRequest.toModel(): Produto {
@@ -17,7 +17,7 @@ fun ProdutoRequest.toModel(): Produto {
         id = this.id,
         nome = this.nome,
         preco = this.preco,
-        categoria = this.categoriaProduto
+        categoria = this.categoria
     )
 }
 
@@ -26,6 +26,6 @@ fun ProdutoRequest.toUpdate(id: UUID): Produto {
         id = id,
         nome = this.nome,
         preco = this.preco,
-        categoria = this.categoriaProduto
+        categoria = this.categoria
     )
 }
