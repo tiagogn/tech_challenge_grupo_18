@@ -1,16 +1,6 @@
 package br.com.fiap.lanchonete.core.domain.entities
 
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.FetchType
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToMany
+import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.Duration
 import java.time.LocalDateTime
@@ -34,23 +24,57 @@ data class Pedido(
     val total: BigDecimal = itens.sumOf { it.precoUnitario * it.quantidade.toBigDecimal() },
 
     @Enumerated(EnumType.STRING)
-    val status: StatusPedido = StatusPedido.RECEBIDO,
+    var status: StatusPedido = StatusPedido.AGUARDANDO_PAGAMENTO,
 
     val criadoEm: LocalDateTime = LocalDateTime.now(),
 
-    val atualizadoEm: LocalDateTime = LocalDateTime.now(),
+    var atualizadoEm: LocalDateTime = LocalDateTime.now(),
 
-    val prontoEm: LocalDateTime = LocalDateTime.now(),
+    var prontoEm: LocalDateTime? = null,
 
-    val finalizadoEm: LocalDateTime = LocalDateTime.now(),
-
-    val tempoEspera: String
-
+    var finalizadoEm: LocalDateTime? = null,
 ) {
-    enum class StatusPedido {
-        RECEBIDO,
-        EM_PREPARACAO,
-        PRONTO,
-        FINALIZADO
+
+    fun pagamentoAprovado() {
+        if (status == StatusPedido.AGUARDANDO_PAGAMENTO) {
+            status = StatusPedido.RECEBIDO
+            atualizadoEm = LocalDateTime.now()
+        }
     }
+
+    fun pedidoEmPreparacao() {
+        if (status == StatusPedido.RECEBIDO) {
+            status = StatusPedido.EM_PREPARACAO
+            atualizadoEm = LocalDateTime.now()
+        }
+    }
+
+    fun pedidoPronto() {
+        if (status == StatusPedido.EM_PREPARACAO) {
+            status = StatusPedido.PRONTO
+            atualizadoEm = LocalDateTime.now()
+            prontoEm = LocalDateTime.now()
+        }
+    }
+
+    fun pedidoFinalizado() {
+        if (status == StatusPedido.PRONTO) {
+            status = StatusPedido.FINALIZADO
+            atualizadoEm = LocalDateTime.now()
+            finalizadoEm = LocalDateTime.now()
+        }
+    }
+
+    fun tempoEspera(): String {
+        return if (status == StatusPedido.PRONTO) {
+            val tempoEspera = Duration.between(criadoEm, prontoEm)
+            "${tempoEspera.toMinutes()} minutos"
+        } else {
+            "0 minutos"
+        }
+    }
+}
+
+enum class StatusPedido {
+    AGUARDANDO_PAGAMENTO, RECEBIDO, EM_PREPARACAO, PRONTO, FINALIZADO
 }

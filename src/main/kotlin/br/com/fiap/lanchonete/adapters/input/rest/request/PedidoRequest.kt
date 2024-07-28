@@ -1,7 +1,6 @@
 package br.com.fiap.lanchonete.adapters.input.rest.request
 
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
-import br.com.fiap.lanchonete.core.domain.entities.Pedido
 import br.com.fiap.lanchonete.core.domain.entities.Produto
 import java.math.BigDecimal
 import java.util.*
@@ -35,10 +34,3 @@ fun ItemPedidoRequest.toModel(): ItemPedido {
     )
 }
 
-data class AtualizarStatusRequest(
-    val novoStatus: Pedido.StatusPedido
-)
-
-data class historicoPedido(
-    val idPedido: Pedido
-)

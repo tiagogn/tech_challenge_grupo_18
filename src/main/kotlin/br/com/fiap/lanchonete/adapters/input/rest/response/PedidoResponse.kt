@@ -2,6 +2,7 @@ package br.com.fiap.lanchonete.adapters.input.rest.response
 
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
 import br.com.fiap.lanchonete.core.domain.entities.Pedido
+import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.util.*
@@ -11,12 +12,11 @@ data class PedidoResponse(
     val cliente: ClienteResponse?,
     val itens: List<ItemPedidoResponse>,
     val total: BigDecimal,
-    val status: Pedido.StatusPedido,
+    val status: StatusPedido,
     val criadoEm: LocalDateTime,
     val atualizadoEm: LocalDateTime,
     val tempoEspera: String
 )
-
 
 data class ItemPedidoResponse(
     var id: UUID?,
@@ -34,7 +34,7 @@ fun Pedido.toResponse(): PedidoResponse {
         status = this.status,
         criadoEm = this.criadoEm,
         atualizadoEm = this.atualizadoEm,
-        tempoEspera = this.tempoEspera
+        tempoEspera = this.tempoEspera()
     )
 }
 
@@ -46,3 +46,9 @@ fun ItemPedido.toResponse(): ItemPedidoResponse {
         precoUnitario = this.precoUnitario
     )
 }
+
+data class AtualizacaoPedidoStatusResponse(
+    val pedidoId: String,
+    val statusPedido: StatusPedido,
+    val mensagem: String
+)

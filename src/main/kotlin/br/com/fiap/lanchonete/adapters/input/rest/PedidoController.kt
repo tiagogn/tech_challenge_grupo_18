@@ -1,57 +1,78 @@
 package br.com.fiap.lanchonete.adapters.input.rest
 
-import br.com.fiap.lanchonete.adapters.input.rest.request.AtualizarStatusRequest
 import br.com.fiap.lanchonete.adapters.input.rest.request.PedidoRequest
 import br.com.fiap.lanchonete.adapters.input.rest.request.toModel
-import br.com.fiap.lanchonete.adapters.input.rest.response.ItemPedidoResponse
+import br.com.fiap.lanchonete.adapters.input.rest.response.AtualizacaoPedidoStatusResponse
 import br.com.fiap.lanchonete.adapters.input.rest.response.PedidoResponse
-import br.com.fiap.lanchonete.adapters.input.rest.response.ProdutoResponse
 import br.com.fiap.lanchonete.adapters.input.rest.response.toResponse
 import br.com.fiap.lanchonete.core.application.ports.input.PedidoService
-import br.com.fiap.lanchonete.core.domain.entities.Pedido
+import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.math.BigDecimal
-import java.time.LocalDateTime
 import java.util.*
 
 @RestController
-@RequestMapping("/api/pedidos")
+@RequestMapping("/v1/pedidos")
 class PedidoController(
     private val pedidoService: PedidoService
 ) {
 
     @PostMapping
-    fun criarPedido(@RequestBody request: PedidoRequest): ResponseEntity<PedidoResponse> {
+    fun criarPedido(@RequestBody(required = true) request: PedidoRequest): ResponseEntity<PedidoResponse> {
         val itens = request.itens.map { it.toModel() }
         val pedido = pedidoService.criarPedido(request.clienteId, itens)
         return ResponseEntity.status(HttpStatus.CREATED).body(pedido.toResponse())
     }
 
-    @PatchMapping("/{pedidoId}/status")
-    fun atualizarStatusPedido(
-        @PathVariable pedidoId: UUID,
-        @RequestBody request: AtualizarStatusRequest
-    ): ResponseEntity<PedidoResponse> {
-        val pedidoAtualizado = pedidoService.atualizarStatusPedido(pedidoId, request.novoStatus)
-        return ResponseEntity.status(HttpStatus.OK).body(pedidoAtualizado.toResponse())
+    @PatchMapping("/{pedidoId}/preparacao")
+    fun pedidoEmPreparacao(
+        @PathVariable(required = true) pedidoId: UUID,
+    ): ResponseEntity<AtualizacaoPedidoStatusResponse> {
+        val pedido = pedidoService.enviandoPedidoParaCozinha(pedidoId)
+        val response = AtualizacaoPedidoStatusResponse(
+            pedidoId = pedido.id.toString(),
+            statusPedido = pedido.status,
+            mensagem = "Pedido enviado para cozinha"
+        )
+        return ResponseEntity.status(HttpStatus.OK).body(response)
     }
 
-    @PostMapping("/{pedidoId}/checkout")
-    fun finalizarPedido(@PathVariable pedidoId: UUID): ResponseEntity<PedidoResponse> {
-        val pedidoFinalizado = pedidoService.atualizarStatusPedido(pedidoId, Pedido.StatusPedido.FINALIZADO)
-        return ResponseEntity.status(HttpStatus.OK).body(pedidoFinalizado.toResponse())
+    @PatchMapping("/{pedidoId}/pronto")
+    fun pedidoPronto(
+        @PathVariable(required = true) pedidoId: UUID,
+    ): ResponseEntity<AtualizacaoPedidoStatusResponse> {
+        val pedido = pedidoService.pedidoPronto(pedidoId)
+        val response = AtualizacaoPedidoStatusResponse(
+            pedidoId = pedido.id.toString(),
+            statusPedido = pedido.status,
+            mensagem = "Pedido pronto para retirada"
+        )
+        return ResponseEntity.status(HttpStatus.OK).body(response)
     }
 
-    @GetMapping("/fila")
-    fun listarPedidosNaFila(): ResponseEntity<List<PedidoResponse>> {
-        val pedidosNaFila = pedidoService.listarPedidosNaFila()
-        return ResponseEntity.status(HttpStatus.OK).body(pedidosNaFila.map { it.toResponse() })
+    @PatchMapping("/{pedidoId}/finalizado")
+    fun pedidoFinalizado(
+        @PathVariable(required = true) pedidoId: UUID,
+    ): ResponseEntity<AtualizacaoPedidoStatusResponse> {
+        val pedido = pedidoService.pedidoFinalizado(pedidoId)
+        val response = AtualizacaoPedidoStatusResponse(
+            pedidoId = pedido.id.toString(),
+            statusPedido = pedido.status,
+            mensagem = "Pedido finalizado e entregue"
+        )
+        return ResponseEntity.status(HttpStatus.OK).body(response)
     }
+
+    @GetMapping("")
+    fun listarPedidos(@RequestParam(required = true) status: StatusPedido): ResponseEntity<List<PedidoResponse>> {
+        val pedidos = pedidoService.listarPedidosPorStatus(status)
+        return ResponseEntity.status(HttpStatus.OK).body(pedidos.map { it.toResponse() })
+    }
+
     @GetMapping("/{pedidoId}")
-    fun historicoPedido(@PathVariable pedidoId: UUID): PedidoResponse {
-        val pedido = pedidoService.historicoPedido(pedidoId)
+    fun buscarPorId(@PathVariable(required = true) pedidoId: UUID): PedidoResponse {
+        val pedido = pedidoService.buscarPorId(pedidoId)
         return PedidoResponse(
             id = pedido.id,
             cliente = pedido.cliente?.toResponse(),
@@ -60,8 +81,8 @@ class PedidoController(
             status = pedido.status,
             criadoEm = pedido.criadoEm,
             atualizadoEm = pedido.atualizadoEm,
-            tempoEspera = pedido.tempoEspera
-            )
+            tempoEspera = pedido.tempoEspera()
+        )
     }
 
 }

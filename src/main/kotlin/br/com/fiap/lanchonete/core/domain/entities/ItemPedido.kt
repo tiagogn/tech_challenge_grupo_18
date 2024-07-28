@@ -29,4 +29,9 @@ data class ItemPedido(
     val precoUnitario: BigDecimal,
 
     val categoria: String
-)
+) {
+
+    fun getSubTotal(): BigDecimal {
+        return precoUnitario * quantidade.toBigDecimal()
+    }
+}
