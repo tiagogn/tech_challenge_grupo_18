@@ -1,8 +1,8 @@
 package br.com.fiap.lanchonete.core.application.services
 
-import br.com.fiap.lanchonete.adapters.output.persistence.ClienteRepositoryImpl
-import br.com.fiap.lanchonete.adapters.output.persistence.PedidoRepository
 import br.com.fiap.lanchonete.core.application.ports.input.PedidoService
+import br.com.fiap.lanchonete.core.application.ports.output.repository.ClienteRepository
+import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRepository
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
 import br.com.fiap.lanchonete.core.domain.entities.Pedido
@@ -16,7 +16,7 @@ import java.util.*
 @Qualifier("pedidoService")
 class PedidoServiceImpl(
     private val pedidoRepository: PedidoRepository,
-    private val clienteRepository: ClienteRepositoryImpl
+    private val clienteRepository: ClienteRepository
 ) : PedidoService {
 
     override fun criarPedido(clienteId: UUID?, itens: List<ItemPedido>): Pedido {

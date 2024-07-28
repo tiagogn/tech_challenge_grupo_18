@@ -1,7 +1,7 @@
 package br.com.fiap.lanchonete.core.application.services
 
-import br.com.fiap.lanchonete.adapters.output.persistence.ProdutoRepositoryImpl
 import br.com.fiap.lanchonete.core.application.ports.input.ProdutoService
+import br.com.fiap.lanchonete.core.application.ports.output.repository.ProdutoRepository
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
 import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import br.com.fiap.lanchonete.core.domain.entities.Produto
@@ -12,7 +12,7 @@ import java.util.*
 @Service
 @Qualifier("produtoService")
 class ProdutoServiceImpl(
-    private val produtoRepository: ProdutoRepositoryImpl
+    private val produtoRepository: ProdutoRepository
 ) : ProdutoService {
 
     override fun cadastrarProduto(produto: Produto): Produto {

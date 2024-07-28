@@ -1,9 +1,9 @@
 package br.com.fiap.lanchonete.core.application.services
 
-import br.com.fiap.lanchonete.adapters.output.persistence.PagamentoRepository
-import br.com.fiap.lanchonete.adapters.output.persistence.PedidoRepository
 import br.com.fiap.lanchonete.core.application.ports.input.PagamentoService
 import br.com.fiap.lanchonete.core.application.ports.output.gateway.PagamentoGateway
+import br.com.fiap.lanchonete.core.application.ports.output.repository.PagamentoRepository
+import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRepository
 import br.com.fiap.lanchonete.core.domain.entities.FormaPagamento
 import br.com.fiap.lanchonete.core.domain.entities.Pagamento
 import br.com.fiap.lanchonete.core.domain.entities.StatusPagamento
