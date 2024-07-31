@@ -18,10 +18,10 @@ class ClienteController(
 ) {
     @PostMapping
     @ResponseBody
-    fun cadastrarCliente(@RequestBody clienteRequest: ClienteRequest): ClienteResponse {
+    fun cadastrarCliente(@RequestBody(required = true) clienteRequest: ClienteRequest): ClienteResponse {
         val cliente = clienteService.cadastrarCliente(clienteRequest.toModel())
         return ClienteResponse(
-            identificador = cliente.identificador.toString(),
+            id = cliente.id.toString(),
             nome = cliente.nome,
             email = cliente.email,
             cpf = cliente.cpf
@@ -30,10 +30,10 @@ class ClienteController(
 
     @GetMapping("/cpf/{cpf}")
     @ResponseBody
-    fun buscarClientePorCPF(@PathVariable cpf: String): ClienteResponse {
+    fun buscarClientePorCPF(@PathVariable(required = true) cpf: String): ClienteResponse {
         val cliente = clienteService.buscarClientePorCPF(cpf)
         return ClienteResponse(
-            identificador = cliente.identificador.toString(),
+            id = cliente.id.toString(),
             nome = cliente.nome,
             email = cliente.email,
             cpf = cliente.cpf

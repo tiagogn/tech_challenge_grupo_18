@@ -1,12 +1,12 @@
-package br.com.fiap.lanchonete.core.application.ports.input
+package br.com.fiap.lanchonete.core.application.ports.output.repository
 
 import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import br.com.fiap.lanchonete.core.domain.entities.Produto
 import java.util.*
 
-interface ProdutoService {
-    fun cadastrarProduto(produto: Produto): Produto
-    fun atualizarProduto(produto: Produto): Produto
-    fun deletarProduto(id: UUID)
+interface ProdutoRepository {
     fun findByCategoria(categoriaProduto: CategoriaProduto): List<Produto>
+    fun save(produto: Produto): Produto
+    fun findById(id: UUID): Optional<Produto>
+    fun delete(produto: Produto)
 }

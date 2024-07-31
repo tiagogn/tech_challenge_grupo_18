@@ -1,19 +1,20 @@
 package br.com.fiap.lanchonete.adapters.input.rest.request
 
+import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import br.com.fiap.lanchonete.core.domain.entities.Produto
-import br.com.fiap.lanchonete.core.domain.entities.Produto.Categoria
 import java.math.BigDecimal
-import java.util.UUID
+import java.util.*
 
 data class ProdutoRequest(
+    var id: UUID? = null,
     val nome: String,
     val preco: BigDecimal,
-    val categoria: Categoria
+    val categoria: CategoriaProduto
 )
 
 fun ProdutoRequest.toModel(): Produto {
     return Produto(
-        id = UUID.randomUUID(),
+        id = this.id,
         nome = this.nome,
         preco = this.preco,
         categoria = this.categoria

@@ -1,9 +1,10 @@
 package br.com.fiap.lanchonete.core.application.services
 
 import br.com.fiap.lanchonete.core.application.ports.input.ProdutoService
-import br.com.fiap.lanchonete.core.domain.entities.Produto
+import br.com.fiap.lanchonete.core.application.ports.output.repository.ProdutoRepository
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
-import br.com.fiap.lanchonete.adapters.output.persistence.ProdutoRepository
+import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
+import br.com.fiap.lanchonete.core.domain.entities.Produto
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import java.util.*
@@ -19,7 +20,7 @@ class ProdutoServiceImpl(
     }
 
     override fun atualizarProduto(produto: Produto): Produto {
-        produtoRepository.findById(produto.id)
+        produtoRepository.findById(produto.id!!)
             .orElseThrow { ResourceNotFoundException("Produto não encontrado") }
         return produtoRepository.save(produto)
     }
@@ -30,8 +31,8 @@ class ProdutoServiceImpl(
         produtoRepository.delete(produto)
     }
 
-    override fun findByCategoria(categoria: String): List<Produto> {
-        return produtoRepository.findByCategoria(categoria);
+    override fun findByCategoria(categoriaProduto: CategoriaProduto): List<Produto> {
+        return produtoRepository.findByCategoria(categoriaProduto)
 
     }
 

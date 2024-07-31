@@ -5,6 +5,7 @@ import br.com.fiap.lanchonete.adapters.input.rest.request.toModel
 import br.com.fiap.lanchonete.adapters.input.rest.request.toUpdate
 import br.com.fiap.lanchonete.adapters.input.rest.response.ProdutoResponse
 import br.com.fiap.lanchonete.core.application.ports.input.ProdutoService
+import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -26,10 +27,11 @@ class ProdutoController(
             categoria = produto.categoria
         )
     }
-    @GetMapping ("/categoria/{categoria}")
+
+    @GetMapping("")
     @ResponseBody
-    fun buscarProdutoporCategoria(@PathVariable categoria: String): List<ProdutoResponse> {
-        return produtoService.findByCategoria(categoria).map { produto ->
+    fun buscarProdutoporCategoria(@RequestParam(required = true) categoria: CategoriaProduto): ResponseEntity<List<ProdutoResponse>> {
+        val produtos = produtoService.findByCategoria(categoria).map { produto ->
             ProdutoResponse(
                 id = produto.id.toString(),
                 nome = produto.nome,
@@ -37,11 +39,17 @@ class ProdutoController(
                 categoria = produto.categoria
             )
         }
+        return if (produtos.isEmpty()) {
+            ResponseEntity.notFound().build()
+        } else {
+            ResponseEntity.ok(produtos)
+        }
     }
+
     @PutMapping("/{id}")
     fun atualizarProduto(
-        @PathVariable id: UUID,
-        @RequestBody produtoRequest: ProdutoRequest
+        @PathVariable(required = true) id: UUID,
+        @RequestBody(required = true) produtoRequest: ProdutoRequest
     ): ProdutoResponse {
         val produto = produtoService.atualizarProduto(produtoRequest.toUpdate(id))
         return ProdutoResponse(
@@ -54,9 +62,9 @@ class ProdutoController(
 
     @DeleteMapping("/{id}")
     fun deletarProduto(
-        @PathVariable id: UUID
+        @PathVariable(required = true) id: UUID
     ): ResponseEntity<Unit> {
         produtoService.deletarProduto(id)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.noContent().build()
     }
 }
