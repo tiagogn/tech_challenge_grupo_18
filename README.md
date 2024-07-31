@@ -1,7 +1,3 @@
-https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
-
-https://readme.so/pt/editor
-
 # Projeto da lanchonete Grupo 18 Pós-Tech - FIAP
 
 O objetivo do projeto é disponibilizar APIs para os seguintes serviços da lanchonete:
