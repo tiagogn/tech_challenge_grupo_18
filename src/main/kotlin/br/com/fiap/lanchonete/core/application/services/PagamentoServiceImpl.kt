@@ -7,12 +7,8 @@ import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRep
 import br.com.fiap.lanchonete.core.domain.entities.FormaPagamento
 import br.com.fiap.lanchonete.core.domain.entities.Pagamento
 import br.com.fiap.lanchonete.core.domain.entities.StatusPagamento
-import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.stereotype.Service
 import java.util.*
 
-@Service
-@Qualifier("pagamentoService")
 class PagamentoServiceImpl(
     private val pedidoRepository: PedidoRepository,
     private val pagamentoRepository: PagamentoRepository,

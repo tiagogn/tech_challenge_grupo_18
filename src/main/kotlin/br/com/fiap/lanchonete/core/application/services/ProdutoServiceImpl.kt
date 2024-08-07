@@ -5,12 +5,8 @@ import br.com.fiap.lanchonete.core.application.ports.output.repository.ProdutoRe
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
 import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import br.com.fiap.lanchonete.core.domain.entities.Produto
-import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.stereotype.Service
 import java.util.*
 
-@Service
-@Qualifier("produtoService")
 class ProdutoServiceImpl(
     private val produtoRepository: ProdutoRepository
 ) : ProdutoService {

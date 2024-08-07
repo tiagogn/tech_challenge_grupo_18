@@ -7,13 +7,8 @@ import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFo
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
 import br.com.fiap.lanchonete.core.domain.entities.Pedido
 import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
-import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.stereotype.Service
 import java.util.*
 
-
-@Service
-@Qualifier("pedidoService")
 class PedidoServiceImpl(
     private val pedidoRepository: PedidoRepository,
     private val clienteRepository: ClienteRepository
