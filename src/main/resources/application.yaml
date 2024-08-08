@@ -5,6 +5,9 @@ spring:
     name: lanchonete
   datasource:
     driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/lanchonete
+    username: lanchonete_user
+    password: lanchonete_password
   jpa:
     hibernate:
       ddl-auto: update

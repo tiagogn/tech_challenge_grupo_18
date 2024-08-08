@@ -17,7 +17,7 @@ class PedidoServiceImpl(
     override fun criarPedido(clienteId: UUID?, itens: List<ItemPedido>): Pedido {
         val cliente =
             clienteId?.let {
-                clienteRepository.findById(it).orElseThrow { ResourceNotFoundException("Cliente não encontrado") }
+                clienteRepository.findById(it) ?: throw ResourceNotFoundException("Cliente não encontrado")
             }
         val pedido = Pedido(
             cliente = cliente,
