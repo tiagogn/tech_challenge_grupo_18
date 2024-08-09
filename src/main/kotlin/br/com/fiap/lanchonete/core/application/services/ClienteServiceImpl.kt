@@ -13,6 +13,6 @@ class ClienteServiceImpl(
     }
 
     override fun buscarClientePorCPF(cpf: String): Cliente {
-        return clienteRepository.findByCPF(cpf) ?: throw ResourceNotFoundException("Cliente não encontrado")
+        return clienteRepository.findByCPF(cpf).orElseThrow { ResourceNotFoundException("Cliente não encontrado") }
     }
 }

@@ -4,8 +4,6 @@ import br.com.fiap.lanchonete.core.application.ports.output.repository.ClienteRe
 import br.com.fiap.lanchonete.core.domain.entities.Cliente
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.jdbc.core.simple.JdbcClient
-import org.springframework.jdbc.support.GeneratedKeyHolder
-import org.springframework.jdbc.support.KeyHolder
 import org.springframework.stereotype.Repository
 import java.util.*
 
@@ -24,7 +22,7 @@ class ClienteRepositoryAdapter(
     }
 
     private fun persist(cliente: Cliente) {
-        val keyHolder: KeyHolder = GeneratedKeyHolder()
+        cliente.id = UUID.randomUUID()
         jdbcClient.sql(
             """
             INSERT INTO cliente (id, nome, email, cpf)
@@ -33,15 +31,13 @@ class ClienteRepositoryAdapter(
         )
             .params(
                 mapOf(
-                    "id" to cliente.id.toString(),
+                    "id" to cliente.id,
                     "nome" to cliente.nome,
                     "email" to cliente.email,
                     "cpf" to cliente.cpf
                 )
             )
-            .update(keyHolder)
-
-        cliente.id = UUID.fromString(keyHolder.key?.toString())
+            .update()
     }
 
     private fun update(cliente: Cliente) {
@@ -54,7 +50,7 @@ class ClienteRepositoryAdapter(
         )
             .params(
                 mapOf(
-                    "id" to cliente.id.toString(),
+                    "id" to cliente.id,
                     "nome" to cliente.nome,
                     "email" to cliente.email,
                     "cpf" to cliente.cpf
@@ -63,37 +59,42 @@ class ClienteRepositoryAdapter(
             .update()
     }
 
-    override fun findByCPF(cpf: String): Cliente? {
+    override fun findByCPF(cpf: String): Optional<Cliente> {
         return jdbcClient.sql("SELECT * FROM cliente WHERE cpf = :cpf")
             .params(mapOf("cpf" to cpf))
             .query { rs, _ ->
-                if (rs.next()) {
-                    return@query Cliente(
-                        id = UUID.fromString(rs.getString("id")),
-                        nome = rs.getString("nome"),
-                        email = rs.getString("email"),
-                        cpf = rs.getString("cpf")
-                    )
-                }
-                return@query null
+                Cliente(
+                    id = UUID.fromString(rs.getString("id")),
+                    nome = rs.getString("nome"),
+                    email = rs.getString("email"),
+                    cpf = rs.getString("cpf")
+                )
             }
-            .single()
+            .optional()
     }
 
-    override fun findById(id: UUID): Cliente? {
-        return jdbcClient.sql("SELECT * FROM cliente WHERE id = :id")
-            .params(mapOf("id" to id.toString()))
+    override fun findById(id: UUID): Optional<Cliente> {
+        return jdbcClient.sql(
+            """
+            SELECT id, nome, email, cpf
+            FROM cliente
+            WHERE id = :id
+        """
+        )
+            .params(
+                mapOf(
+                    "id" to id
+                )
+            )
             .query { rs, _ ->
-                if (rs.next()) {
-                    return@query Cliente(
-                        id = UUID.fromString(rs.getString("id")),
-                        nome = rs.getString("nome"),
-                        email = rs.getString("email"),
-                        cpf = rs.getString("cpf")
-                    )
-                }
-                return@query null
+                Cliente(
+                    id = UUID.fromString(rs.getString("id")),
+                    nome = rs.getString("nome"),
+                    email = rs.getString("email"),
+                    cpf = rs.getString("cpf")
+                )
             }
-            .single()
+            .optional()
     }
+
 }

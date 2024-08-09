@@ -1,29 +1,20 @@
 package br.com.fiap.lanchonete.core.domain.entities
 
-import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.Duration
 import java.time.LocalDateTime
 import java.util.*
 
-@Entity
 data class Pedido(
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     var id: UUID? = null,
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     val cliente: Cliente?,
 
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-    @JoinColumn(name = "pedido_id")
     val itens: List<ItemPedido>,
 
     val total: BigDecimal = itens.sumOf { it.precoUnitario * it.quantidade.toBigDecimal() },
 
-    @Enumerated(EnumType.STRING)
     var status: StatusPedido = StatusPedido.AGUARDANDO_PAGAMENTO,
 
     val criadoEm: LocalDateTime = LocalDateTime.now(),
