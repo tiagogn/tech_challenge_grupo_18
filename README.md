@@ -1,8 +1,9 @@
-https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
-
-https://readme.so/pt/editor
-
 # Projeto da lanchonete Grupo 18 Pós-Tech - FIAP
+
+![Java](https://img.shields.io/badge/Java-17-red)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-3.1-green)
+![Docker](https://img.shields.io/badge/Docker-20.10-blue)
+![Postgres](https://img.shields.io/badge/Postgres-16-blue)
 
 O objetivo do projeto é disponibilizar APIs para os seguintes serviços da lanchonete:
 
@@ -36,6 +37,12 @@ Para rodar o projeto através do Docker Compose, utilize o seguinte comando:
 
 ```
 docker-compose -f docker-compose.yaml up -d
+```
+
+ou execute o seguinte comando na pasta do projeto:
+
+```
+./gradlew bootRun
 ```
 
 ## Swagger
