@@ -1,6 +1,6 @@
 package br.com.fiap.lanchonete.core.domain.entities
 
-import java.util.*
+import java.util.UUID
 
 data class Cliente(
 

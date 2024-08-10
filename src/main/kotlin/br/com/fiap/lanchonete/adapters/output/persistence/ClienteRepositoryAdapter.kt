@@ -5,7 +5,8 @@ import br.com.fiap.lanchonete.core.domain.entities.Cliente
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.jdbc.core.simple.JdbcClient
 import org.springframework.stereotype.Repository
-import java.util.*
+import java.util.Optional
+import java.util.UUID
 
 @Repository
 @Qualifier("clienteRepository")

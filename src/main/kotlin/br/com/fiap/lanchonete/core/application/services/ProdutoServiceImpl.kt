@@ -5,7 +5,7 @@ import br.com.fiap.lanchonete.core.application.ports.output.repository.ProdutoRe
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
 import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import br.com.fiap.lanchonete.core.domain.entities.Produto
-import java.util.*
+import java.util.UUID
 
 class ProdutoServiceImpl(
     private val produtoRepository: ProdutoRepository

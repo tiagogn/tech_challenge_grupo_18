@@ -2,7 +2,7 @@ package br.com.fiap.lanchonete.core.application.ports.input
 
 import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import br.com.fiap.lanchonete.core.domain.entities.Produto
-import java.util.*
+import java.util.UUID
 
 interface ProdutoService {
     fun cadastrarProduto(produto: Produto): Produto

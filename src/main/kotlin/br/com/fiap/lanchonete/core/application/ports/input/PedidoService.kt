@@ -3,7 +3,7 @@ package br.com.fiap.lanchonete.core.application.ports.input
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
 import br.com.fiap.lanchonete.core.domain.entities.Pedido
 import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
-import java.util.*
+import java.util.UUID
 
 interface PedidoService {
     fun criarPedido(clienteId: UUID?, itens: List<ItemPedido>): Pedido

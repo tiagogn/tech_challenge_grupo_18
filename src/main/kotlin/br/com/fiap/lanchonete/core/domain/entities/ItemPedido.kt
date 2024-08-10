@@ -1,7 +1,7 @@
 package br.com.fiap.lanchonete.core.domain.entities
 
 import java.math.BigDecimal
-import java.util.*
+import java.util.UUID
 
 data class ItemPedido(
 

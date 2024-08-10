@@ -8,7 +8,7 @@ import br.com.fiap.lanchonete.core.application.ports.input.ProdutoService
 import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.*
+import java.util.UUID
 
 @RestController
 @RequestMapping("/v1/produtos")

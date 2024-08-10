@@ -7,7 +7,7 @@ import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFo
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
 import br.com.fiap.lanchonete.core.domain.entities.Pedido
 import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
-import java.util.*
+import java.util.UUID
 
 class PedidoServiceImpl(
     private val pedidoRepository: PedidoRepository,

@@ -6,7 +6,8 @@ import br.com.fiap.lanchonete.core.domain.entities.Produto
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.jdbc.core.simple.JdbcClient
 import org.springframework.stereotype.Repository
-import java.util.*
+import java.util.Optional
+import java.util.UUID
 
 @Repository
 @Qualifier("produtoRepository")
@@ -50,12 +51,13 @@ class ProdutoRepositoryAdapter(
         produto.id = UUID.randomUUID()
         jdbcClient.sql(
             """
-            INSERT INTO produto (nome, preco, categoria)
-            VALUES (:nome, :preco, :categoria)
+            INSERT INTO produto (id, nome, preco, categoria)
+            VALUES (:id, :nome, :preco, :categoria)
         """
         )
             .params(
                 mapOf(
+                    "id" to produto.id,
                     "nome" to produto.nome,
                     "preco" to produto.preco,
                     "categoria" to produto.categoria.name

@@ -5,7 +5,7 @@ import br.com.fiap.lanchonete.core.domain.entities.Pedido
 import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import java.util.*
+import java.util.UUID
 
 data class PedidoResponse(
     var id: UUID?,

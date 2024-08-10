@@ -7,7 +7,7 @@ import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRep
 import br.com.fiap.lanchonete.core.domain.entities.FormaPagamento
 import br.com.fiap.lanchonete.core.domain.entities.Pagamento
 import br.com.fiap.lanchonete.core.domain.entities.StatusPagamento
-import java.util.*
+import java.util.UUID
 
 class PagamentoServiceImpl(
     private val pedidoRepository: PedidoRepository,
