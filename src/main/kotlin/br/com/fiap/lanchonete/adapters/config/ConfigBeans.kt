@@ -37,7 +37,7 @@ class ConfigBeans(
 
     @Bean
     fun pedidoService(): PedidoService {
-        return PedidoServiceImpl(pedidoRepository, clienteRepository)
+        return PedidoServiceImpl(pedidoRepository, clienteRepository, produtoRepository)
     }
 
     @Bean

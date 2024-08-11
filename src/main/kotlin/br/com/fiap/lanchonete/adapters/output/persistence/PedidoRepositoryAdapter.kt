@@ -1,17 +1,11 @@
 package br.com.fiap.lanchonete.adapters.output.persistence
 
 import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRepository
-import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
-import br.com.fiap.lanchonete.core.domain.entities.Cliente
-import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
-import br.com.fiap.lanchonete.core.domain.entities.Pedido
-import br.com.fiap.lanchonete.core.domain.entities.Produto
-import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
+import br.com.fiap.lanchonete.core.domain.entities.*
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.jdbc.core.simple.JdbcClient
 import org.springframework.stereotype.Repository
-import java.util.Optional
-import java.util.UUID
+import java.util.*
 
 @Repository
 @Qualifier("pedidoRepository")
@@ -21,7 +15,7 @@ class PedidoRepositoryAdapter(
     override fun save(pedido: Pedido): Pedido {
         return if (pedido.id == null) {
             pedido.id = UUID.randomUUID()
-            insert(pedido)
+            persist(pedido)
         } else {
             update(pedido)
         }
@@ -38,7 +32,7 @@ class PedidoRepositoryAdapter(
                     "id" to id
                 )
             )
-            .query { rs, _ -> mapPedido(rs) }
+            .query { rs, _ -> mapRowPedido(rs) }
             .optional()
     }
 
@@ -53,11 +47,11 @@ class PedidoRepositoryAdapter(
                     "status" to statusPedido.name
                 )
             )
-            .query { rs, _ -> mapPedido(rs) }
+            .query { rs, _ -> mapRowPedido(rs) }
             .list()
     }
 
-    private fun insert(pedido: Pedido): Pedido {
+    private fun persist(pedido: Pedido): Pedido {
         jdbcClient.sql(
             """
             INSERT INTO pedido (id, cliente_id, total, status, criado_em, atualizado_em, pronto_em, finalizado_em) 
@@ -66,7 +60,30 @@ class PedidoRepositoryAdapter(
         )
             .params(mapParams(pedido))
             .update()
+
+        pedido.itens.forEach { persistItemPedido(it, pedido.id!!) }
         return pedido
+    }
+
+    private fun persistItemPedido(itemPedido: ItemPedido, pedidoId: UUID) {
+        jdbcClient.sql(
+            """
+            INSERT INTO item_pedido (id, pedido_id, produto_id, nome_produto, quantidade, preco_unitario, categoria) 
+            VALUES (:id, :pedido_id, :produto_id, :nome_produto, :quantidade, :preco_unitario, :categoria)
+        """
+        )
+            .params(
+                mapOf(
+                    "id" to UUID.randomUUID(),
+                    "pedido_id" to pedidoId,
+                    "produto_id" to itemPedido.produto.id,
+                    "nome_produto" to itemPedido.nomeProduto,
+                    "quantidade" to itemPedido.quantidade,
+                    "preco_unitario" to itemPedido.precoUnitario,
+                    "categoria" to itemPedido.categoria
+                )
+            )
+            .update()
     }
 
     private fun update(pedido: Pedido): Pedido {
@@ -97,11 +114,11 @@ class PedidoRepositoryAdapter(
         )
     }
 
-    private fun mapPedido(rs: java.sql.ResultSet): Pedido {
+    private fun mapRowPedido(rs: java.sql.ResultSet): Pedido {
         val pedidoId = UUID.fromString(rs.getString("id"))
         return Pedido(
             id = pedidoId,
-            cliente = findClienteById(UUID.fromString(rs.getString("cliente_id"))),
+            cliente = findClienteById(rs.getString("cliente_id")),
             itens = findItensByPedidoId(pedidoId),
             total = rs.getBigDecimal("total"),
             status = StatusPedido.valueOf(rs.getString("status")),
@@ -112,7 +129,10 @@ class PedidoRepositoryAdapter(
         )
     }
 
-    private fun findClienteById(id: UUID): Cliente? {
+    private fun findClienteById(id: String?): Cliente? {
+        if (id == null)
+            return null
+
         return jdbcClient.sql(
             """
             SELECT * FROM cliente WHERE id = :id
@@ -120,7 +140,7 @@ class PedidoRepositoryAdapter(
         )
             .params(
                 mapOf(
-                    "id" to id
+                    "id" to UUID.fromString(id)
                 )
             )
             .query { rs, _ ->

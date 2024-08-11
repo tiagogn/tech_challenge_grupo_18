@@ -3,7 +3,7 @@ package br.com.fiap.lanchonete.core.domain.entities
 import java.math.BigDecimal
 import java.time.Duration
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 data class Pedido(
 
@@ -13,7 +13,7 @@ data class Pedido(
 
     val itens: List<ItemPedido>,
 
-    val total: BigDecimal = itens.sumOf { it.precoUnitario * it.quantidade.toBigDecimal() },
+    val total: BigDecimal = BigDecimal.ZERO,
 
     var status: StatusPedido = StatusPedido.AGUARDANDO_PAGAMENTO,
 

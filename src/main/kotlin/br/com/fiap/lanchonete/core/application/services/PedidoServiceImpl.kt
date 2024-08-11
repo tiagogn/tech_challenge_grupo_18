@@ -3,15 +3,17 @@ package br.com.fiap.lanchonete.core.application.services
 import br.com.fiap.lanchonete.core.application.ports.input.PedidoService
 import br.com.fiap.lanchonete.core.application.ports.output.repository.ClienteRepository
 import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRepository
+import br.com.fiap.lanchonete.core.application.ports.output.repository.ProdutoRepository
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
 import br.com.fiap.lanchonete.core.domain.entities.Pedido
 import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
-import java.util.UUID
+import java.util.*
 
 class PedidoServiceImpl(
     private val pedidoRepository: PedidoRepository,
-    private val clienteRepository: ClienteRepository
+    private val clienteRepository: ClienteRepository,
+    private val produtoRepository: ProdutoRepository
 ) : PedidoService {
 
     override fun criarPedido(clienteId: UUID?, itens: List<ItemPedido>): Pedido {
@@ -19,6 +21,14 @@ class PedidoServiceImpl(
             clienteId?.let {
                 clienteRepository.findById(it).orElseThrow { throw ResourceNotFoundException("Cliente não encontrado") }
             }
+
+        itens.forEach {
+            it.produto.id?.let { it1 ->
+                produtoRepository.findById(it1)
+                    .orElseThrow { throw ResourceNotFoundException("Produto ${it.nomeProduto} não encontrado") }
+            }
+        }
+
         val pedido = Pedido(
             cliente = cliente,
             itens = itens,
