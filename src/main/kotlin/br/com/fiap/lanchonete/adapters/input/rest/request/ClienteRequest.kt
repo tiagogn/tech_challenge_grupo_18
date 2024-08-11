@@ -1,7 +1,7 @@
 package br.com.fiap.lanchonete.adapters.input.rest.request
 
 import br.com.fiap.lanchonete.core.domain.entities.Cliente
-import java.util.*
+import java.util.UUID
 
 data class ClienteRequest(
     var id: UUID? = null,

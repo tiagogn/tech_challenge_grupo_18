@@ -4,7 +4,7 @@ import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
 import br.com.fiap.lanchonete.core.domain.entities.Produto
 import java.math.BigDecimal
-import java.util.*
+import java.util.UUID
 
 data class PedidoRequest(
     val clienteId: UUID?,

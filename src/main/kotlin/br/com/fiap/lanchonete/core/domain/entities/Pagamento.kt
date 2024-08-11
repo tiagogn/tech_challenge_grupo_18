@@ -1,26 +1,19 @@
 package br.com.fiap.lanchonete.core.domain.entities
 
-import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import java.util.*
+import java.util.UUID
 
-@Entity(name = "pagamento")
 data class Pagamento(
-    @Id
-    @GeneratedValue(generator = "UUID")
-    val id: UUID? = null,
 
-    @ManyToOne
-    @JoinColumn(name = "pedido_id")
+    var id: UUID? = null,
+
     val pedido: Pedido,
 
     val valor: BigDecimal,
 
-    @Enumerated(EnumType.STRING)
     var status: StatusPagamento,
 
-    @Enumerated(EnumType.STRING)
     val formaPagamento: FormaPagamento,
 
     var transactionId: UUID? = null,

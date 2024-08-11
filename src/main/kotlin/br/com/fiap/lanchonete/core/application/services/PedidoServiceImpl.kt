@@ -7,13 +7,8 @@ import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFo
 import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
 import br.com.fiap.lanchonete.core.domain.entities.Pedido
 import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
-import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.stereotype.Service
-import java.util.*
+import java.util.UUID
 
-
-@Service
-@Qualifier("pedidoService")
 class PedidoServiceImpl(
     private val pedidoRepository: PedidoRepository,
     private val clienteRepository: ClienteRepository
@@ -22,7 +17,7 @@ class PedidoServiceImpl(
     override fun criarPedido(clienteId: UUID?, itens: List<ItemPedido>): Pedido {
         val cliente =
             clienteId?.let {
-                clienteRepository.findById(it).orElseThrow { ResourceNotFoundException("Cliente não encontrado") }
+                clienteRepository.findById(it).orElseThrow { throw ResourceNotFoundException("Cliente não encontrado") }
             }
         val pedido = Pedido(
             cliente = cliente,

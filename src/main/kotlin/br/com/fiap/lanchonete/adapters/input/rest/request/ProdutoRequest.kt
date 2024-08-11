@@ -3,7 +3,7 @@ package br.com.fiap.lanchonete.adapters.input.rest.request
 import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
 import br.com.fiap.lanchonete.core.domain.entities.Produto
 import java.math.BigDecimal
-import java.util.*
+import java.util.UUID
 
 data class ProdutoRequest(
     var id: UUID? = null,
