@@ -61,29 +61,9 @@ class PedidoRepositoryAdapter(
             .params(mapParams(pedido))
             .update()
 
+        val persistItemPedido = ItemPedidoRespositoryAdapter(jdbcClient)::persist
         pedido.itens.forEach { persistItemPedido(it, pedido.id!!) }
         return pedido
-    }
-
-    private fun persistItemPedido(itemPedido: ItemPedido, pedidoId: UUID) {
-        jdbcClient.sql(
-            """
-            INSERT INTO item_pedido (id, pedido_id, produto_id, nome_produto, quantidade, preco_unitario, categoria) 
-            VALUES (:id, :pedido_id, :produto_id, :nome_produto, :quantidade, :preco_unitario, :categoria)
-        """
-        )
-            .params(
-                mapOf(
-                    "id" to UUID.randomUUID(),
-                    "pedido_id" to pedidoId,
-                    "produto_id" to itemPedido.produto.id,
-                    "nome_produto" to itemPedido.nomeProduto,
-                    "quantidade" to itemPedido.quantidade,
-                    "preco_unitario" to itemPedido.precoUnitario,
-                    "categoria" to itemPedido.categoria
-                )
-            )
-            .update()
     }
 
     private fun update(pedido: Pedido): Pedido {
@@ -116,6 +96,7 @@ class PedidoRepositoryAdapter(
 
     private fun mapRowPedido(rs: java.sql.ResultSet): Pedido {
         val pedidoId = UUID.fromString(rs.getString("id"))
+        val findItensByPedidoId = ItemPedidoRespositoryAdapter(jdbcClient)::findByPedidoId
         return Pedido(
             id = pedidoId,
             cliente = findClienteById(rs.getString("cliente_id")),
@@ -153,7 +134,33 @@ class PedidoRepositoryAdapter(
             }.optional().orElse(null)
     }
 
-    private fun findItensByPedidoId(pedidoId: UUID): List<ItemPedido> {
+}
+
+class ItemPedidoRespositoryAdapter(
+    private val jdbcClient: JdbcClient
+) {
+    fun persist(itemPedido: ItemPedido, pedidoId: UUID) {
+        jdbcClient.sql(
+            """
+            INSERT INTO item_pedido (id, pedido_id, produto_id, nome_produto, quantidade, preco_unitario, categoria) 
+            VALUES (:id, :pedido_id, :produto_id, :nome_produto, :quantidade, :preco_unitario, :categoria)
+        """
+        )
+            .params(
+                mapOf(
+                    "id" to UUID.randomUUID(),
+                    "pedido_id" to pedidoId,
+                    "produto_id" to itemPedido.produto.id,
+                    "nome_produto" to itemPedido.nomeProduto,
+                    "quantidade" to itemPedido.quantidade,
+                    "preco_unitario" to itemPedido.precoUnitario,
+                    "categoria" to itemPedido.categoria
+                )
+            )
+            .update()
+    }
+
+    fun findByPedidoId(pedidoId: UUID): List<ItemPedido> {
         return jdbcClient.sql(
             """
             SELECT * FROM item_pedido WHERE pedido_id = :pedido_id
