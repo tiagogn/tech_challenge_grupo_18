@@ -1,8 +1,8 @@
 package br.com.fiap.lanchonete.adapters.input.rest.request
 
-import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
-import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
-import br.com.fiap.lanchonete.core.domain.entities.Produto
+import br.com.fiap.lanchonete.core.domain.CategoriaProduto
+import br.com.fiap.lanchonete.core.domain.ItemPedido
+import br.com.fiap.lanchonete.core.domain.Produto
 import java.math.BigDecimal
 import java.util.UUID
 

@@ -5,9 +5,9 @@ import br.com.fiap.lanchonete.core.application.ports.output.repository.ClienteRe
 import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRepository
 import br.com.fiap.lanchonete.core.application.ports.output.repository.ProdutoRepository
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
-import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
-import br.com.fiap.lanchonete.core.domain.entities.Pedido
-import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
+import br.com.fiap.lanchonete.core.domain.ItemPedido
+import br.com.fiap.lanchonete.core.domain.Pedido
+import br.com.fiap.lanchonete.core.domain.StatusPedido
 import java.util.*
 
 class PedidoServiceImpl(

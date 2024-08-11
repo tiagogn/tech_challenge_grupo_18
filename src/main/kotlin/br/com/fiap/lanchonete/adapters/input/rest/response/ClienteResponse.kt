@@ -1,6 +1,6 @@
 package br.com.fiap.lanchonete.adapters.input.rest.response
 
-import br.com.fiap.lanchonete.core.domain.entities.Cliente
+import br.com.fiap.lanchonete.core.domain.Cliente
 
 data class ClienteResponse(
     val id: String,

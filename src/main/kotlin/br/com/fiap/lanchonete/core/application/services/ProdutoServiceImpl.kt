@@ -3,8 +3,8 @@ package br.com.fiap.lanchonete.core.application.services
 import br.com.fiap.lanchonete.core.application.ports.input.ProdutoService
 import br.com.fiap.lanchonete.core.application.ports.output.repository.ProdutoRepository
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
-import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
-import br.com.fiap.lanchonete.core.domain.entities.Produto
+import br.com.fiap.lanchonete.core.domain.CategoriaProduto
+import br.com.fiap.lanchonete.core.domain.Produto
 import java.util.UUID
 
 class ProdutoServiceImpl(

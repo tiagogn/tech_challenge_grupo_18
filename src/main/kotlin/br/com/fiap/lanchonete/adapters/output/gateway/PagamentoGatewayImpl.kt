@@ -1,9 +1,9 @@
 package br.com.fiap.lanchonete.adapters.output.gateway
 
 import br.com.fiap.lanchonete.core.application.ports.output.gateway.PagamentoGateway
-import br.com.fiap.lanchonete.core.domain.entities.FormaPagamento
-import br.com.fiap.lanchonete.core.domain.entities.Pagamento
-import br.com.fiap.lanchonete.core.domain.entities.StatusPagamento
+import br.com.fiap.lanchonete.core.domain.FormaPagamento
+import br.com.fiap.lanchonete.core.domain.Pagamento
+import br.com.fiap.lanchonete.core.domain.StatusPagamento
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 

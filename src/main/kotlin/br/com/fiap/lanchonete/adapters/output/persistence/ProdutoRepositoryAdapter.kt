@@ -1,8 +1,8 @@
 package br.com.fiap.lanchonete.adapters.output.persistence
 
 import br.com.fiap.lanchonete.core.application.ports.output.repository.ProdutoRepository
-import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
-import br.com.fiap.lanchonete.core.domain.entities.Produto
+import br.com.fiap.lanchonete.core.domain.CategoriaProduto
+import br.com.fiap.lanchonete.core.domain.Produto
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.jdbc.core.simple.JdbcClient
 import org.springframework.stereotype.Repository

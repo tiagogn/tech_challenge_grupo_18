@@ -5,7 +5,7 @@ import br.com.fiap.lanchonete.adapters.input.rest.request.toModel
 import br.com.fiap.lanchonete.adapters.input.rest.request.toUpdate
 import br.com.fiap.lanchonete.adapters.input.rest.response.ProdutoResponse
 import br.com.fiap.lanchonete.core.application.ports.input.ProdutoService
-import br.com.fiap.lanchonete.core.domain.entities.CategoriaProduto
+import br.com.fiap.lanchonete.core.domain.CategoriaProduto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.UUID

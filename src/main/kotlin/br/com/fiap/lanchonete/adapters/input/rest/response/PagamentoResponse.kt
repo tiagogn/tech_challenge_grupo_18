@@ -1,6 +1,6 @@
 package br.com.fiap.lanchonete.adapters.input.rest.response
 
-import br.com.fiap.lanchonete.core.domain.entities.StatusPagamento
+import br.com.fiap.lanchonete.core.domain.StatusPagamento
 import java.math.BigDecimal
 import java.util.UUID
 

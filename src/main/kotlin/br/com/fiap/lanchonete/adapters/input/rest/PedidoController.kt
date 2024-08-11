@@ -6,7 +6,7 @@ import br.com.fiap.lanchonete.adapters.input.rest.response.AtualizacaoPedidoStat
 import br.com.fiap.lanchonete.adapters.input.rest.response.PedidoResponse
 import br.com.fiap.lanchonete.adapters.input.rest.response.toResponse
 import br.com.fiap.lanchonete.core.application.ports.input.PedidoService
-import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
+import br.com.fiap.lanchonete.core.domain.StatusPedido
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

@@ -1,7 +1,7 @@
 package br.com.fiap.lanchonete.adapters.output.persistence
 
 import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRepository
-import br.com.fiap.lanchonete.core.domain.entities.*
+import br.com.fiap.lanchonete.core.domain.*
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.jdbc.core.simple.JdbcClient
 import org.springframework.stereotype.Repository
@@ -140,6 +140,7 @@ class ItemPedidoRespositoryAdapter(
     private val jdbcClient: JdbcClient
 ) {
     fun persist(itemPedido: ItemPedido, pedidoId: UUID) {
+        val id = UUID.randomUUID()
         jdbcClient.sql(
             """
             INSERT INTO item_pedido (id, pedido_id, produto_id, nome_produto, quantidade, preco_unitario, categoria) 
@@ -148,7 +149,7 @@ class ItemPedidoRespositoryAdapter(
         )
             .params(
                 mapOf(
-                    "id" to UUID.randomUUID(),
+                    "id" to id,
                     "pedido_id" to pedidoId,
                     "produto_id" to itemPedido.produto.id,
                     "nome_produto" to itemPedido.nomeProduto,
@@ -158,6 +159,8 @@ class ItemPedidoRespositoryAdapter(
                 )
             )
             .update()
+
+        itemPedido.id = id
     }
 
     fun findByPedidoId(pedidoId: UUID): List<ItemPedido> {

@@ -1,8 +1,8 @@
 package br.com.fiap.lanchonete.adapters.input.rest.response
 
-import br.com.fiap.lanchonete.core.domain.entities.ItemPedido
-import br.com.fiap.lanchonete.core.domain.entities.Pedido
-import br.com.fiap.lanchonete.core.domain.entities.StatusPedido
+import br.com.fiap.lanchonete.core.domain.ItemPedido
+import br.com.fiap.lanchonete.core.domain.Pedido
+import br.com.fiap.lanchonete.core.domain.StatusPedido
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.util.UUID

@@ -4,9 +4,9 @@ import br.com.fiap.lanchonete.core.application.ports.input.PagamentoService
 import br.com.fiap.lanchonete.core.application.ports.output.gateway.PagamentoGateway
 import br.com.fiap.lanchonete.core.application.ports.output.repository.PagamentoRepository
 import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRepository
-import br.com.fiap.lanchonete.core.domain.entities.FormaPagamento
-import br.com.fiap.lanchonete.core.domain.entities.Pagamento
-import br.com.fiap.lanchonete.core.domain.entities.StatusPagamento
+import br.com.fiap.lanchonete.core.domain.FormaPagamento
+import br.com.fiap.lanchonete.core.domain.Pagamento
+import br.com.fiap.lanchonete.core.domain.StatusPagamento
 import java.util.UUID
 
 class PagamentoServiceImpl(

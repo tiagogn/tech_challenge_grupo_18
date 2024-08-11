@@ -1,4 +1,4 @@
-package br.com.fiap.lanchonete.core.domain.entities
+package br.com.fiap.lanchonete.core.domain
 
 import java.math.BigDecimal
 import java.time.Duration

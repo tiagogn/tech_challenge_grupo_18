@@ -1,6 +1,6 @@
 package br.com.fiap.lanchonete.core.application.ports.output.repository
 
-import br.com.fiap.lanchonete.core.domain.entities.Cliente
+import br.com.fiap.lanchonete.core.domain.Cliente
 import java.util.Optional
 import java.util.UUID
 

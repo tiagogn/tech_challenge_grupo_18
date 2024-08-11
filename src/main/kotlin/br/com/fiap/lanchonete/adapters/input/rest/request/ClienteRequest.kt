@@ -1,6 +1,6 @@
 package br.com.fiap.lanchonete.adapters.input.rest.request
 
-import br.com.fiap.lanchonete.core.domain.entities.Cliente
+import br.com.fiap.lanchonete.core.domain.Cliente
 import java.util.UUID
 
 data class ClienteRequest(
@@ -8,7 +8,7 @@ data class ClienteRequest(
     val nome: String,
     val email: String,
     val cpf: String
-){
+) {
     fun toModel(): Cliente {
         return Cliente(
             id = this.id,
