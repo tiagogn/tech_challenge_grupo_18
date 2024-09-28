@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lanchonete-deployment
+  labels:
+    app: lanchonete
+spec:
+  replicas: 3 # Número de réplicas para a aplicação
+  selector:
+    matchLabels:
+      app: lanchonete
+  template:
+    metadata:
+      labels:
+        app: lanchonete
+    spec:
+      containers:
+        - name: lanchonete
+          image: rscosta10/lanchonete:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "docker"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+            - name: POSTGRES_DB
+              value: "lanchonete"
+            - name: POSTGRES_HOST
+              value: "postgres" # Nome do serviço do Postgres no cluster
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
