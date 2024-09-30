@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lanchonete-deployment
+  namespace: lanchonete
   labels:
     app: lanchonete
 spec:
-  replicas: 3 # Número de réplicas para a aplicação
+  replicas: 3
   selector:
     matchLabels:
       app: lanchonete
@@ -35,7 +36,7 @@ spec:
             - name: POSTGRES_DB
               value: "lanchonete"
             - name: POSTGRES_HOST
-              value: "postgres" # Nome do serviço do Postgres no cluster
+              value: "postgres"
           readinessProbe:
             httpGet:
               path: /actuator/health
