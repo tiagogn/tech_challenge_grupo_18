@@ -8,6 +8,8 @@ import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFo
 import br.com.fiap.lanchonete.core.domain.ItemPedido
 import br.com.fiap.lanchonete.core.domain.Pedido
 import br.com.fiap.lanchonete.core.domain.StatusPedido
+import br.com.fiap.lanchonete.core.dto.PedidoOutput
+import br.com.fiap.lanchonete.core.dto.PedidoStatusOutput
 import java.util.*
 
 class PedidoServiceImpl(
@@ -67,8 +69,26 @@ class PedidoServiceImpl(
         return pedido
     }
 
-    override fun listarPedidosPorStatus(statusPedido: StatusPedido): List<Pedido> {
-        return pedidoRepository.findByStatus(statusPedido)
+    override fun listarPedidosAgrupadosPorStatus(): List<PedidoStatusOutput> {
+
+        val findByStatusAgrupado =
+            pedidoRepository.findAllByOrderByStatusNotIn(StatusPedido.FINALIZADO).groupBy { it.status }
+
+        return findByStatusAgrupado.map {
+            PedidoStatusOutput(
+                status = it.key.name,
+                pedidos = it.value.map { pedido ->
+                    PedidoOutput(
+                        id = pedido.id.toString(),
+                        codigo = pedido.codigo!!,
+                        valor = pedido.total,
+                        status = pedido.status.name,
+                        criadoEm = pedido.criadoEm,
+                        clienteId = pedido.cliente?.id.toString()
+                    )
+                }.toList()
+            )
+        }
     }
 
     override fun buscarPorId(pedidoId: UUID): Pedido {
@@ -99,7 +119,4 @@ class PedidoServiceImpl(
         return pedido
     }
 
-    override fun listarPedidoOrdenadoPorStatus(): List<Pedido> {
-        return pedidoRepository.findAllByOrderByStatusNotIn(StatusPedido.FINALIZADO)
-    }
 }

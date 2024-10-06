@@ -2,10 +2,7 @@ package br.com.fiap.lanchonete.adapters.input.rest
 
 import br.com.fiap.lanchonete.adapters.input.rest.request.PedidoRequest
 import br.com.fiap.lanchonete.adapters.input.rest.request.toModel
-import br.com.fiap.lanchonete.adapters.input.rest.response.AtualizacaoPedidoStatusResponse
-import br.com.fiap.lanchonete.adapters.input.rest.response.PedidoResponse
-import br.com.fiap.lanchonete.adapters.input.rest.response.PedidoStatusResponse
-import br.com.fiap.lanchonete.adapters.input.rest.response.toResponse
+import br.com.fiap.lanchonete.adapters.input.rest.response.*
 import br.com.fiap.lanchonete.core.application.ports.input.PedidoService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -65,9 +62,10 @@ class PedidoController(
     }
 
     @GetMapping("")
-    fun listarPedidos(): ResponseEntity<List<PedidoResponse>> {
-        val pedidos = pedidoService.listarPedidoOrdenadoPorStatus()
-        return ResponseEntity.status(HttpStatus.OK).body(pedidos.map { it.toResponse() })
+    fun listarPedidos(): ResponseEntity<List<PedidosAgrupadosResponse>> {
+        val pedidos = pedidoService.listarPedidosAgrupadosPorStatus()
+        val response = PedidosAgrupadosResponseMapper.toResponse(pedidos)
+        return ResponseEntity.status(HttpStatus.OK).body(response)
     }
 
     @GetMapping("/{pedidoId}")

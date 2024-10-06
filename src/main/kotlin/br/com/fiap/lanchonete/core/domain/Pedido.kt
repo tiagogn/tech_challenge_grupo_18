@@ -62,6 +62,8 @@ data class Pedido(
     }
 }
 
-enum class StatusPedido {
-    RECEBIDO, EM_PREPARACAO, PRONTO, FINALIZADO
+enum class StatusPedido(
+    val value: Int
+) {
+    RECEBIDO(1), EM_PREPARACAO(2), PRONTO(3), FINALIZADO(4);
 }
