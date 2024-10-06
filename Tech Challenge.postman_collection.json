@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"X-Bacon\",\r\n    \"preco\": \"33.00\",\r\n    \"categoria\":\"LANCHE\"\r\n}\r\n",
+							"raw": "{\r\n    \"nome\": \"Pudim\",\r\n    \"preco\": \"25.00\",\r\n    \"categoria\":\"SOBREMESA\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -46,7 +46,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Guaraná\",\r\n    \"preco\": 7.00,\r\n    \"categoria\": \"BEBIDA\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"X-Egg\",\r\n    \"preco\": 31.55,\r\n    \"categoria\": \"LANCHE\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -69,7 +69,7 @@
 							"variable": [
 								{
 									"key": "produtoId",
-									"value": "52453d95-ab7b-4437-8a54-c404efad46dc"
+									"value": "1bd9fc8c-4547-4cdf-86fb-4b8545f68dde"
 								}
 							]
 						}
@@ -106,7 +106,7 @@
 							"variable": [
 								{
 									"key": "produtoId",
-									"value": "52453d95-ab7b-4437-8a54-c404efad46dc"
+									"value": "320f06c6-8585-40b4-b83c-db31b2628664"
 								}
 							]
 						}
@@ -119,7 +119,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/lanchonete/v1/produtos?categoria=LANCHE",
+							"raw": "http://localhost:8080/lanchonete/v1/produtos?categoria=SOBREMESA",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -133,7 +133,8 @@
 							"query": [
 								{
 									"key": "categoria",
-									"value": "LANCHE"
+									"value": "LANCHE",
+									"disabled": true
 								},
 								{
 									"key": "categoria",
@@ -147,8 +148,7 @@
 								},
 								{
 									"key": "categoria",
-									"value": "SOBREMESA",
-									"disabled": true
+									"value": "SOBREMESA"
 								}
 							]
 						}
@@ -194,7 +194,7 @@
 							"variable": [
 								{
 									"key": "cpf",
-									"value": "12345678902"
+									"value": "29696814801"
 								}
 							]
 						}
@@ -208,7 +208,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"Mariana Gatto Gonçalves\",\r\n  \"cpf\": \"12345678902\",\r\n  \"email\": \"mariana@gmail.com\"\r\n}",
+							"raw": "{\r\n  \"nome\": \"John Doe\",\r\n  \"cpf\": \"29696832102\",\r\n  \"email\": \"johndoe@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -255,7 +255,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"clienteId\":\"\",\r\n    \"itens\": [\r\n        {\r\n            \"produtoId\": \"2ca753ae-382b-4c13-911b-21256efe023b\",\r\n            \"nomeProduto\": \"X-Bacon\",\r\n            \"quantidade\": 1,\r\n            \"precoUnitario\": 33.00,\r\n            \"categoria\": \"LANCHE\"\r\n        },\r\n        {\r\n            \"produtoId\": \"7b73beb9-88c7-4681-b48b-54ec905c1f69\",\r\n            \"nomeProduto\": \"Coca-Cola\",\r\n            \"quantidade\": 1,\r\n            \"precoUnitario\": 7.00,\r\n            \"categoria\": \"BEBIDA\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"clienteId\":\"a3269f49-7044-4520-b2c4-2a19a955badf\",\r\n    \"itens\": [\r\n        {\r\n            \"produtoId\": \"272a6b0f-6681-44f5-9c4f-c433d8ad2620\",\r\n            \"nomeProduto\": \"X-Egg\",\r\n            \"quantidade\": 1,\r\n            \"precoUnitario\": 31.00,\r\n            \"categoria\": \"LANCHE\"\r\n        },\r\n        {\r\n            \"produtoId\": \"e240f195-05fb-4a90-b94b-e2da8bd53918\",\r\n            \"nomeProduto\": \"Coca-Cola\",\r\n            \"quantidade\": 1,\r\n            \"precoUnitario\": 10.00,\r\n            \"categoria\": \"BEBIDA\"\r\n        },\r\n        {\r\n            \"produtoId\": \"bad3046b-6929-41fa-8a2c-d7ec748fde4a\",\r\n            \"nomeProduto\": \"Batata Frita\",\r\n            \"quantidade\": 2,\r\n            \"precoUnitario\": 15.00,\r\n            \"categoria\": \"ACOMPANHAMENTO\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -410,7 +410,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/lanchonete/v1/pedidos?status=FINALIZADO",
+							"raw": "http://localhost:8080/lanchonete/v1/pedidos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -420,27 +420,6 @@
 								"lanchonete",
 								"v1",
 								"pedidos"
-							],
-							"query": [
-								{
-									"key": "status",
-									"value": "RECEBIDO",
-									"disabled": true
-								},
-								{
-									"key": "status",
-									"value": "EM_PREPARACAO",
-									"disabled": true
-								},
-								{
-									"key": "status",
-									"value": "PRONTO",
-									"disabled": true
-								},
-								{
-									"key": "status",
-									"value": "FINALIZADO"
-								}
 							]
 						}
 					},
@@ -467,7 +446,36 @@
 							"variable": [
 								{
 									"key": "pedidoId",
-									"value": "dd91c378-0a39-4934-bdbf-8014c68b5bc2"
+									"value": "fb7b5e74-efd7-4d27-9de4-4cbbb7c7f92e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Status Pedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lanchonete/v1/pedidos/:pedidoId/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lanchonete",
+								"v1",
+								"pedidos",
+								":pedidoId",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "{{pedidoId}}"
 								}
 							]
 						}
@@ -480,13 +488,13 @@
 			"name": "Pagamento",
 			"item": [
 				{
-					"name": "Checkout",
+					"name": "Webhook",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"pedidoId\": \"{{pedidoId}}\",\n    \"valor\": 40.0,\n    \"formaPagamento\": \"PIX\"\n}",
+							"raw": "{\n    \"pedidoId\": \"{{pedidoId}}\",\n    \"valor\": 71.0,\n    \"formaPagamento\": \"PIX\",\n    \"status\": \"APROVADO\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -494,7 +502,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/lanchonete/v1/pagamento",
+							"raw": "http://localhost:8080/lanchonete/v1/pagamento/webhook",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -503,7 +511,48 @@
 							"path": [
 								"lanchonete",
 								"v1",
-								"pagamento"
+								"pagamento",
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pagamento Status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pedidoId\": \"{{pedidoId}}\",\n    \"valor\": 40.0,\n    \"formaPagamento\": \"PIX\",\n    \"status\": \"APROVADO\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/lanchonete/v1/pagamento/pedido?pedidoId={{pedidoId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lanchonete",
+								"v1",
+								"pagamento",
+								"pedido"
+							],
+							"query": [
+								{
+									"key": "pedidoId",
+									"value": "{{pedidoId}}"
+								}
 							]
 						}
 					},
