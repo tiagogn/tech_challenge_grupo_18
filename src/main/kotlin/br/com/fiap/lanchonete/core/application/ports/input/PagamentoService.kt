@@ -1,9 +1,7 @@
 package br.com.fiap.lanchonete.core.application.ports.input
 
-import br.com.fiap.lanchonete.core.domain.FormaPagamento
-import br.com.fiap.lanchonete.core.domain.Pagamento
-import java.util.UUID
+import br.com.fiap.lanchonete.core.dto.PagamentoInput
 
 interface PagamentoService {
-    fun checkout(pedidoId: UUID, formaPagamento: FormaPagamento): Pagamento
+    fun confirmarPagamento(pagamentoInput: PagamentoInput): Unit
 }

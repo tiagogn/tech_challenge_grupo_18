@@ -5,8 +5,7 @@ import br.com.fiap.lanchonete.core.domain.Cliente
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.jdbc.core.simple.JdbcClient
 import org.springframework.stereotype.Repository
-import java.util.Optional
-import java.util.UUID
+import java.util.*
 
 @Repository
 @Qualifier("clienteRepository")
@@ -74,7 +73,10 @@ class ClienteRepositoryAdapter(
             .optional()
     }
 
-    override fun findById(id: UUID): Optional<Cliente> {
+    override fun findById(id: UUID?): Optional<Cliente> {
+        if (id == null)
+            return Optional.empty()
+
         return jdbcClient.sql(
             """
             SELECT id, nome, email, cpf

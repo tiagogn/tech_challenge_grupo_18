@@ -4,13 +4,13 @@ import br.com.fiap.lanchonete.adapters.input.rest.request.PedidoRequest
 import br.com.fiap.lanchonete.adapters.input.rest.request.toModel
 import br.com.fiap.lanchonete.adapters.input.rest.response.AtualizacaoPedidoStatusResponse
 import br.com.fiap.lanchonete.adapters.input.rest.response.PedidoResponse
+import br.com.fiap.lanchonete.adapters.input.rest.response.PedidoStatusResponse
 import br.com.fiap.lanchonete.adapters.input.rest.response.toResponse
 import br.com.fiap.lanchonete.core.application.ports.input.PedidoService
-import br.com.fiap.lanchonete.core.domain.StatusPedido
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.UUID
+import java.util.*
 
 @RestController
 @RequestMapping("/v1/pedidos")
@@ -65,8 +65,8 @@ class PedidoController(
     }
 
     @GetMapping("")
-    fun listarPedidos(@RequestParam(required = true) status: StatusPedido): ResponseEntity<List<PedidoResponse>> {
-        val pedidos = pedidoService.listarPedidosPorStatus(status)
+    fun listarPedidos(): ResponseEntity<List<PedidoResponse>> {
+        val pedidos = pedidoService.listarPedidoOrdenadoPorStatus()
         return ResponseEntity.status(HttpStatus.OK).body(pedidos.map { it.toResponse() })
     }
 
@@ -81,7 +81,18 @@ class PedidoController(
             status = pedido.status,
             criadoEm = pedido.criadoEm,
             atualizadoEm = pedido.atualizadoEm,
-            tempoEspera = pedido.tempoEspera()
+            tempoEspera = pedido.tempoEspera(),
+            codigo = pedido.codigo!!
+        )
+    }
+
+    @GetMapping("/{pedidoId}/status")
+    fun buscarStatus(@PathVariable(required = true) pedidoId: UUID): PedidoStatusResponse {
+        val pedido = pedidoService.buscarPorId(pedidoId)
+        return PedidoStatusResponse(
+            status = pedido.status,
+            codigo = pedido.codigo!!,
+            pagamento = pedido.pagamento?.status.toString()
         )
     }
 

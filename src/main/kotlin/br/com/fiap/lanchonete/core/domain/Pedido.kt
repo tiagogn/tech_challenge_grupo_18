@@ -15,7 +15,7 @@ data class Pedido(
 
     val total: BigDecimal = BigDecimal.ZERO,
 
-    var status: StatusPedido = StatusPedido.AGUARDANDO_PAGAMENTO,
+    var status: StatusPedido = StatusPedido.RECEBIDO,
 
     val criadoEm: LocalDateTime = LocalDateTime.now(),
 
@@ -24,15 +24,11 @@ data class Pedido(
     var prontoEm: LocalDateTime? = null,
 
     var finalizadoEm: LocalDateTime? = null,
+
+    var codigo: Long? = null,
+
+    var pagamento: Pagamento? = null
 ) {
-
-    fun pagamentoAprovado() {
-        if (status == StatusPedido.AGUARDANDO_PAGAMENTO) {
-            status = StatusPedido.RECEBIDO
-            atualizadoEm = LocalDateTime.now()
-        }
-    }
-
     fun pedidoEmPreparacao() {
         if (status == StatusPedido.RECEBIDO) {
             status = StatusPedido.EM_PREPARACAO
@@ -67,5 +63,5 @@ data class Pedido(
 }
 
 enum class StatusPedido {
-    AGUARDANDO_PAGAMENTO, RECEBIDO, EM_PREPARACAO, PRONTO, FINALIZADO
+    RECEBIDO, EM_PREPARACAO, PRONTO, FINALIZADO
 }

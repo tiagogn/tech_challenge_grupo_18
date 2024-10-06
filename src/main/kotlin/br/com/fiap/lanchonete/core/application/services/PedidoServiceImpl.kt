@@ -34,7 +34,10 @@ class PedidoServiceImpl(
             itens = itens,
             total = itens.sumOf { it.precoUnitario * it.quantidade.toBigDecimal() },
         )
-        return pedidoRepository.save(pedido)
+
+        pedidoRepository.save(pedido)
+
+        return pedido
     }
 
     override fun atualizarStatusPedido(pedidoId: UUID, novoStatus: StatusPedido): Pedido {
@@ -60,7 +63,8 @@ class PedidoServiceImpl(
             }
         }
 
-        return pedidoRepository.save(pedido)
+        pedidoRepository.save(pedido)
+        return pedido
     }
 
     override fun listarPedidosPorStatus(statusPedido: StatusPedido): List<Pedido> {
@@ -75,20 +79,27 @@ class PedidoServiceImpl(
         val pedido =
             pedidoRepository.findById(pedidoId).orElseThrow { ResourceNotFoundException("Pedido não encontrado") }
         pedido.pedidoEmPreparacao()
-        return pedidoRepository.save(pedido)
+        pedidoRepository.save(pedido)
+        return pedido
     }
 
     override fun pedidoPronto(pedidoId: UUID): Pedido {
         val pedido =
             pedidoRepository.findById(pedidoId).orElseThrow { ResourceNotFoundException("Pedido não encontrado") }
         pedido.pedidoPronto()
-        return pedidoRepository.save(pedido)
+        pedidoRepository.save(pedido)
+        return pedido
     }
 
     override fun pedidoFinalizado(pedidoId: UUID): Pedido {
         val pedido =
             pedidoRepository.findById(pedidoId).orElseThrow { ResourceNotFoundException("Pedido não encontrado") }
         pedido.pedidoFinalizado()
-        return pedidoRepository.save(pedido)
+        pedidoRepository.save(pedido)
+        return pedido
+    }
+
+    override fun listarPedidoOrdenadoPorStatus(): List<Pedido> {
+        return pedidoRepository.findAllByOrderByStatusNotIn(StatusPedido.FINALIZADO)
     }
 }
