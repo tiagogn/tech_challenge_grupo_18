@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: lanchonete
-          image: rscosta10/lanchonete:latest
+          image: edureef42/lanchonete:latest
           ports:
             - containerPort: 8080
           env:

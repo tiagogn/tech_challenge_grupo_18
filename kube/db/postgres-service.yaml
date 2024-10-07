@@ -10,6 +10,6 @@ spec:
     - name: postgres
       port: 5432
       targetPort: 5432
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: postgres
