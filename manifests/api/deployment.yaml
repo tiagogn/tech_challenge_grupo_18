@@ -23,7 +23,7 @@ spec:
           resources:
             limits:
               memory: "1024Mi"   # Limite de memória que o container pode usar
-              cpu: "500m"       # Limite de CPU
+              cpu: "1000m"       # Limite de CPU
             requests:
               memory: "512Mi"   # Quantidade mínima de memória necessária
               cpu: "250m"       # Quantidade mínima de CPU necessária
