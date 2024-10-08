@@ -79,3 +79,5 @@ kubectl apply -f devops/
 ## Arquitetura
 
 ## Link do Miro
+
+## Fase I
