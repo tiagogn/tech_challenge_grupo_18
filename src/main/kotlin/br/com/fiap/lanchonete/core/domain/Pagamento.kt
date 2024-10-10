@@ -2,13 +2,11 @@ package br.com.fiap.lanchonete.core.domain
 
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 data class Pagamento(
 
     var id: UUID? = null,
-
-    val pedido: Pedido,
 
     val valor: BigDecimal,
 
@@ -16,17 +14,26 @@ data class Pagamento(
 
     val formaPagamento: FormaPagamento,
 
-    var transactionId: UUID? = null,
-
     var dataPagamento: LocalDateTime? = null
 ) {
 
+    fun pagamentoAprovado() {
+        if (status == StatusPagamento.PENDENTE) {
+            status = StatusPagamento.APROVADO
+        }
+    }
+
+    fun pagamentoRecusado() {
+        if (status == StatusPagamento.PENDENTE) {
+            status = StatusPagamento.RECUSADO
+        }
+    }
 }
 
 enum class StatusPagamento {
-    PENDENTE, APROVADO, REJEITADO
+    PENDENTE, APROVADO, RECUSADO
 }
 
 enum class FormaPagamento {
-    CARTAO_CREDITO, CARTAO_DEBITO, DINHEIRO, PIX, CHEQUE
+    CARTAO_CREDITO, CARTAO_DEBITO, DINHEIRO, PIX, VR
 }

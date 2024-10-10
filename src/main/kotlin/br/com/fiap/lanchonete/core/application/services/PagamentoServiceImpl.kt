@@ -1,44 +1,39 @@
 package br.com.fiap.lanchonete.core.application.services
 
 import br.com.fiap.lanchonete.core.application.ports.input.PagamentoService
-import br.com.fiap.lanchonete.core.application.ports.output.gateway.PagamentoGateway
-import br.com.fiap.lanchonete.core.application.ports.output.repository.PagamentoRepository
 import br.com.fiap.lanchonete.core.application.ports.output.repository.PedidoRepository
-import br.com.fiap.lanchonete.core.domain.FormaPagamento
 import br.com.fiap.lanchonete.core.domain.Pagamento
 import br.com.fiap.lanchonete.core.domain.StatusPagamento
-import java.util.UUID
+import br.com.fiap.lanchonete.core.dto.PagamentoInput
+import br.com.fiap.lanchonete.core.exceptions.PagamentoException
+import java.time.LocalDateTime
 
 class PagamentoServiceImpl(
     private val pedidoRepository: PedidoRepository,
-    private val pagamentoRepository: PagamentoRepository,
-    private val pagamentoGateway: PagamentoGateway
 ) : PagamentoService {
-    override fun checkout(pedidoId: UUID, formaPagamento: FormaPagamento): Pagamento {
+    override fun confirmarPagamento(pagamentoInput: PagamentoInput): Unit {
 
-        val pedido = pedidoRepository.findById(pedidoId).orElseThrow {
+        val pedido = pedidoRepository.findById(pagamentoInput.pedidoId).orElseThrow {
             throw IllegalArgumentException("Pedido não encontrado")
         }
 
-        if (pedido.total <= 0.toBigDecimal()) {
-            throw IllegalArgumentException("Pedido sem valor")
-        }
+        if (pedido.total > pagamentoInput.valor)
+            throw PagamentoException("Valor do pagamento menor que o valor do pedido")
 
         val pagamento = Pagamento(
-            pedido = pedido,
             valor = pedido.total,
-            status = StatusPagamento.PENDENTE,
-            formaPagamento = formaPagamento
+            status = pagamentoInput.status,
+            formaPagamento = pagamentoInput.formaPagamento,
+            dataPagamento = LocalDateTime.now()
         )
 
-        pagamentoGateway.checkout(pagamento)
-        pagamentoRepository.save(pagamento)
+        if (pagamentoInput.status == StatusPagamento.APROVADO)
+            pagamento.pagamentoAprovado()
+        else
+            pagamento.pagamentoRecusado()
 
-        if (pagamento.status == StatusPagamento.APROVADO) {
-            pagamento.pedido.pagamentoAprovado()
-            pedidoRepository.save(pagamento.pedido)
-        }
+        pedido.pagamento = pagamento
 
-        return pagamento
+        pedidoRepository.save(pedido)
     }
 }

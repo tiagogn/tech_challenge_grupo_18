@@ -48,3 +48,34 @@ ou execute o seguinte comando na pasta do projeto:
 ## Swagger
 
 * API (http://localhost:8080/lanchonete/swagger-ui/index.html)
+
+## Postman
+
+Dentro do projeto, existe uma collection do Postman com os endpoints para teste.
+
+* Collection (lanchonete/Tech Challenge.postman_collection.json)
+
+Em cada endpoint, existe um exemplo de requisição para teste.
+
+Ordem de execução dos endpoints:
+
+1. POST Produto/Cadastrar Produto
+2. POST Cliente/Cadastrar Cliente(opcional)
+3. POST Pedido/Cadastrar Pedido
+4. POST Pagamento/Webhook
+5. PATCH Pedido/Pedido em Preparação
+6. PATCH Pedido/Pedido Pronto
+7. PATCH Pedido/Pedido Finalizado
+8. GET Pedido/Listar Pedido
+
+## Kubernetes
+
+Para rodar o projeto no Kubernetes, utilize o seguinte comando:
+
+```
+kubectl apply -f devops/
+```
+
+## Arquitetura
+
+## Link do Miro

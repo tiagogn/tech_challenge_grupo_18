@@ -5,7 +5,7 @@ import br.com.fiap.lanchonete.core.domain.Pedido
 import br.com.fiap.lanchonete.core.domain.StatusPedido
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 data class PedidoResponse(
     var id: UUID?,
@@ -15,7 +15,8 @@ data class PedidoResponse(
     val status: StatusPedido,
     val criadoEm: LocalDateTime,
     val atualizadoEm: LocalDateTime,
-    val tempoEspera: String
+    val tempoEspera: String,
+    val codigo: Long
 )
 
 data class ItemPedidoResponse(
@@ -23,6 +24,12 @@ data class ItemPedidoResponse(
     val nomeProduto: String,
     val quantidade: Int,
     val precoUnitario: BigDecimal
+)
+
+data class PedidoStatusResponse(
+    val codigo: Long,
+    val status: StatusPedido,
+    val pagamento: String
 )
 
 fun Pedido.toResponse(): PedidoResponse {
@@ -34,7 +41,8 @@ fun Pedido.toResponse(): PedidoResponse {
         status = this.status,
         criadoEm = this.criadoEm,
         atualizadoEm = this.atualizadoEm,
-        tempoEspera = this.tempoEspera()
+        tempoEspera = this.tempoEspera(),
+        codigo = this.codigo!!
     )
 }
 

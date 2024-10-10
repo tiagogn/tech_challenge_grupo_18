@@ -8,6 +8,8 @@ import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFo
 import br.com.fiap.lanchonete.core.domain.ItemPedido
 import br.com.fiap.lanchonete.core.domain.Pedido
 import br.com.fiap.lanchonete.core.domain.StatusPedido
+import br.com.fiap.lanchonete.core.dto.PedidoOutput
+import br.com.fiap.lanchonete.core.dto.PedidoStatusOutput
 import java.util.*
 
 class PedidoServiceImpl(
@@ -34,7 +36,10 @@ class PedidoServiceImpl(
             itens = itens,
             total = itens.sumOf { it.precoUnitario * it.quantidade.toBigDecimal() },
         )
-        return pedidoRepository.save(pedido)
+
+        pedidoRepository.save(pedido)
+
+        return pedido
     }
 
     override fun atualizarStatusPedido(pedidoId: UUID, novoStatus: StatusPedido): Pedido {
@@ -60,11 +65,30 @@ class PedidoServiceImpl(
             }
         }
 
-        return pedidoRepository.save(pedido)
+        pedidoRepository.save(pedido)
+        return pedido
     }
 
-    override fun listarPedidosPorStatus(statusPedido: StatusPedido): List<Pedido> {
-        return pedidoRepository.findByStatus(statusPedido)
+    override fun listarPedidosAgrupadosPorStatus(): List<PedidoStatusOutput> {
+
+        val findByStatusAgrupado =
+            pedidoRepository.findAllByOrderByStatusNotIn(StatusPedido.FINALIZADO).groupBy { it.status }
+
+        return findByStatusAgrupado.map {
+            PedidoStatusOutput(
+                status = it.key.name,
+                pedidos = it.value.map { pedido ->
+                    PedidoOutput(
+                        id = pedido.id.toString(),
+                        codigo = pedido.codigo!!,
+                        valor = pedido.total,
+                        status = pedido.status.name,
+                        criadoEm = pedido.criadoEm,
+                        clienteId = pedido.cliente?.id.toString()
+                    )
+                }.toList()
+            )
+        }
     }
 
     override fun buscarPorId(pedidoId: UUID): Pedido {
@@ -75,20 +99,24 @@ class PedidoServiceImpl(
         val pedido =
             pedidoRepository.findById(pedidoId).orElseThrow { ResourceNotFoundException("Pedido não encontrado") }
         pedido.pedidoEmPreparacao()
-        return pedidoRepository.save(pedido)
+        pedidoRepository.save(pedido)
+        return pedido
     }
 
     override fun pedidoPronto(pedidoId: UUID): Pedido {
         val pedido =
             pedidoRepository.findById(pedidoId).orElseThrow { ResourceNotFoundException("Pedido não encontrado") }
         pedido.pedidoPronto()
-        return pedidoRepository.save(pedido)
+        pedidoRepository.save(pedido)
+        return pedido
     }
 
     override fun pedidoFinalizado(pedidoId: UUID): Pedido {
         val pedido =
             pedidoRepository.findById(pedidoId).orElseThrow { ResourceNotFoundException("Pedido não encontrado") }
         pedido.pedidoFinalizado()
-        return pedidoRepository.save(pedido)
+        pedidoRepository.save(pedido)
+        return pedido
     }
+
 }
