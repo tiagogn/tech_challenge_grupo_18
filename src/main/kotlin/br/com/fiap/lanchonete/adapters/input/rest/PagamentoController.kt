@@ -34,16 +34,14 @@ class PagamentoController(
     @GetMapping("/pedido")
     fun buscarPagamentoPorPedidoId(@RequestParam(required = true) pedidoId: UUID): ResponseEntity<PagamentoResponse> {
         val pedido = pedidoService.buscarPorId(pedidoId)
-        return pedido.pagamento?.let {
-            ResponseEntity.ok(
-                PagamentoResponse(
-                    pedidoId = pedido.id.toString(),
-                    codigo = pedido.codigo!!,
-                    valor = it.valor,
-                    status = it.status,
-                )
+        return ResponseEntity.ok(
+            PagamentoResponse(
+                pedidoId = pedido.id.toString(),
+                codigo = pedido.codigo!!,
+                valor = pedido.pagamento?.valor ?: pedido.total,
+                status = pedido.pagamento?.status ?: StatusPagamento.PENDENTE,
             )
-        } ?: ResponseEntity.notFound().build()
+        )
     }
-
 }
+
