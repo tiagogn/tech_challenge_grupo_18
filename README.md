@@ -73,7 +73,7 @@ Ordem de execução dos endpoints:
 Para rodar o projeto no Kubernetes, utilize o seguinte comando:
 
 ```
-kubectl apply -f devops/
+kubectl apply -R -f manifests/
 ```
 
 ## Arquitetura
