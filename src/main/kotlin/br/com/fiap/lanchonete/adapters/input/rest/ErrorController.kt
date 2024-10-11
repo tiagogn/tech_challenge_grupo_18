@@ -2,6 +2,7 @@ package br.com.fiap.lanchonete.adapters.input.rest
 
 import br.com.fiap.lanchonete.adapters.input.rest.response.ErrorResponse
 import br.com.fiap.lanchonete.core.application.services.exceptions.ResourceNotFoundException
+import br.com.fiap.lanchonete.core.exceptions.PagamentoException
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MissingServletRequestParameterException
@@ -45,6 +46,15 @@ class ErrorController {
         logger.error("Registro duplicado", e)
         return ResponseEntity(
             ErrorResponse("Registro já existe"),
+            org.springframework.http.HttpStatus.BAD_REQUEST
+        )
+    }
+
+    @ExceptionHandler(PagamentoException::class)
+    fun handleResourceNotFoundException(e: PagamentoException): ResponseEntity<ErrorResponse> {
+        logger.error("Erro interno", e)
+        return ResponseEntity(
+            ErrorResponse(e.message!!),
             org.springframework.http.HttpStatus.BAD_REQUEST
         )
     }
