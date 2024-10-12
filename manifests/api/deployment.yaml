@@ -4,20 +4,20 @@ metadata:
   name: lanchonete-deployment
   namespace: lanchonete
   labels:
-    app: lanchonete
+    app: ds-lanchonete
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: lanchonete
+      app: ds-lanchonete
   template:
     metadata:
       labels:
-        app: lanchonete
+        app: ds-lanchonete
     spec:
       containers:
         - name: lanchonete
-          image: edureef42/lanchonete:latest
+          image: tiagogn/lanchonete:1.0
           ports:
             - containerPort: 8080
           resources:
@@ -29,12 +29,17 @@ spec:
               cpu: "250m"       # Quantidade mínima de CPU necessária
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: "docker"
+              value: "prd"
+            - name: PG_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: lanchonete-configmap
+                  key: PG_HOST
             - name: POSTGRES_USER
               valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: username
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: postgres_user
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -42,17 +47,15 @@ spec:
                   key: password
             - name: POSTGRES_DB
               value: "lanchonete"
-            - name: POSTGRES_HOST
-              value: "postgres"
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /lanchonete/actuator/health
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 5
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /lanchonete/actuator/health
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 20

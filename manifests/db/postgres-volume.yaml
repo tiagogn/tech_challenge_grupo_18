@@ -5,7 +5,7 @@ metadata:
   namespace: lanchonete
   labels:
     type: local
-    app: postgres
+    app: pv-postgres
 spec:
   storageClassName: manual
   capacity:
@@ -13,7 +13,7 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/data"
+    path: "/var/data"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -21,11 +21,11 @@ metadata:
   name: postgres-pv-claim
   namespace: lanchonete
   labels:
-    app: postgres
+    app: pvc-postgres
 spec:
   storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 5Gi
+      storage: 1Gi
