@@ -84,10 +84,9 @@ Quando um Pod atingir 80% de consumo da CPU, o HPA acionará a criação de um n
 
 Arquitetura To Be Kubernetes na CLOUD
 
-Para rodar o projeto no Kubernetes, utilize o seguinte comando:
-
 ![Arquitetura_Infra.jpg](Arquitetura_Infra.jpg)
 
+Para rodar o projeto no Kubernetes, utilize o seguinte comando:
 ```
 kubectl create namespace lanchonete
 
