@@ -70,10 +70,36 @@ Ordem de execução dos endpoints:
 
 ## Kubernetes
 
+A arquitetura local proposta em Kubernetes visa atender aos requisitos de escalabilidade, permitindo o aumento e diminuição de Pods de acordo com a demanda. Para isso, implementamos dois Deployments: um para a aplicação e outro para o banco de dados.
+
+Deployments:
+
+Deployment da Aplicação: Inicializa com 3 Pods. Projetado para escalar automaticamente conforme a carga. Deployment do Banco de Dados: Inicia com 1 Pod. Gerencia a persistência e integridade dos dados. Configuração do Horizontal Pod Autoscaler (HPA) Para otimizar a escalabilidade da aplicação, configuramos o Horizontal Pod Autoscaler (HPA) com as seguintes especificações:
+
+Métricas de Escalonamento:
+
+Mínimo de Pods: 2 Pods devem estar sempre disponíveis para garantir a continuidade do serviço. Máximo de Pods: O limite é de 10 Pods para evitar sobrecarga e garantir uso eficiente dos recursos. Critério de Escalonamento:
+
+Quando um Pod atingir 80% de consumo da CPU, o HPA acionará a criação de um novo Pod. Isso assegura que a aplicação mantenha um desempenho ideal mesmo em picos de demanda. Fluxo de Trabalho Monitoramento: O HPA monitora continuamente o uso de CPU dos Pods da aplicação. Ajuste Dinâmico: À medida que a demanda aumenta e um ou mais Pods atingem o limite de 80% de uso da CPU, novos Pods são criados automaticamente até o limite máximo de 10. Escalonamento para Baixa Demanda: Quando a demanda diminui, o HPA pode reduzir o número de Pods, mantendo sempre pelo menos 2 Pods em operação
+
+Arquitetura To Be Kubernetes na CLOUD
+
 Para rodar o projeto no Kubernetes, utilize o seguinte comando:
 
+![Arquitetura_Infra.jpg](Arquitetura_Infra.jpg)
+
 ```
+kubectl create namespace lanchonete
+
 kubectl apply -R -f manifests/
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+kubectl get pods -n lanchonete //lista os pods
+
+
+kubectl top pods -n lanchonete  //exibe métrica de consumo dos pods
+ 
 ```
 
 ## Arquitetura
