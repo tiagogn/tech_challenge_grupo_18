@@ -1,44 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: postgres-deployment
   namespace: lanchonete
   labels:
-    app: postgres
+    app: ds-postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: ds-postgres
   template:
     metadata:
       labels:
-        app: postgres
+        app: ds-postgres
     spec:
       containers:
-        - name: postgres
+        - name: ds-postgres
           image: postgres:16
           imagePullPolicy: "IfNotPresent"
           env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: username
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: password
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
                   name: postgres-configmap
                   key: postgres-dbname
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: postgres_user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgredb
+              name: postgres-db
       volumes:
-        - name: postgredb
+        - name: postgres-db
           persistentVolumeClaim:
             claimName: postgres-pv-claim
