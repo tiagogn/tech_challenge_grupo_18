@@ -113,4 +113,4 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 ```
 
 ## Link do Miro
-https://miro.com/welcomeonboard/TGRVTDBYUk9OMlFDVlVmcVN3aXdkcXFXc2Y1TmpVNnBEekRzVklzRnJQUEZRZ1p6WU0waXdmeVRQY09GOTRsRnwzNDU4NzY0NTU3ODY5OTQyNDExfDI=?share_link_id=804570978290
+https://miro.com/app/board/uXjVK5FMZfo=/
