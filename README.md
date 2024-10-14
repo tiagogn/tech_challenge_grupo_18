@@ -96,11 +96,14 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 
 kubectl get pods -n lanchonete //lista os pods
 
-
 kubectl top pods -n lanchonete  //exibe métrica de consumo dos pods
  
 ```
 
-## Arquitetura
-
 ## Link do Miro
+
+https://miro.com/app/board/uXjVK5FMZfo=/
+
+## Link Video Fase 2
+
+https://youtube.com/watch?v=83lInn7reAA&feature=shared
