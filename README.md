@@ -79,3 +79,4 @@ kubectl apply -R -f manifests/
 ## Arquitetura
 
 ## Link do Miro
+https://miro.com/app/board/uXjVK5FMZfo=/
