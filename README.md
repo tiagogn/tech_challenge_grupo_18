@@ -55,7 +55,10 @@ ou execute o seguinte comando na pasta do projeto:
 
 Dentro do projeto, existe uma collection do Postman com os endpoints para teste.
 
-* Collection (lanchonete/Tech Challenge.postman_collection.json)
+* Collection (lanchonete/Tech
+  Challenge.postman_collection.json) [Download](Tech%20Challenge.postman_collection.json)
+* Environment (lanchonete/Tech
+  Challenge.postman_environment.json) [Download](Tech%20Challenge.postman_environment.json)
 
 Em cada endpoint, existe um exemplo de requisição para teste.
 
@@ -113,7 +116,7 @@ Arquitetura To Be Kubernetes na CLOUD
 
 ![Arquitetura_Infra.jpg](Arquitetura_Infra.jpg)
 
-### Para rodar o projeto no Kubernetes, utilize o seguinte comando:
+### Para rodar o projeto no Kubernetes, utilize os seguintes comandos, dentro da pasta raíz do projeto:
 
 ```shell
 kubectl create namespace lanchonete
