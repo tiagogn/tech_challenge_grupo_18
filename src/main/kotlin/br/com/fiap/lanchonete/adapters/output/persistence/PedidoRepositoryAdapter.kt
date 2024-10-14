@@ -6,6 +6,7 @@ import br.com.fiap.lanchonete.core.domain.StatusPedido
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.jdbc.core.simple.JdbcClient
 import org.springframework.stereotype.Repository
+import java.sql.ResultSet
 import java.util.*
 
 @Repository
@@ -119,7 +120,7 @@ class PedidoRepositoryAdapter(
         val pedidoId = UUID.fromString(rs.getString("id"))
         return Pedido(
             id = pedidoId,
-            cliente = clienteRepositoryAdapter.findById(UUID.fromString(rs.getString("cliente_id"))).orElse(null),
+            cliente = clienteRepositoryAdapter.findById(getClienteId(rs)).orElse(null),
             itens = itemPedidoRespositoryAdapter.findByPedidoId(pedidoId),
             total = rs.getBigDecimal("total"),
             status = StatusPedido.valueOf(rs.getString("status")),
@@ -130,6 +131,10 @@ class PedidoRepositoryAdapter(
             codigo = rs.getLong("codigo"),
             pagamento = pagamentoRepositoryAdapter.findById(getPagamentoId(rs)).orElse(null)
         )
+    }
+
+    private fun getClienteId(rs: ResultSet): UUID? {
+        return rs.getString("cliente_id")?.let { UUID.fromString(it) }
     }
 
     private fun getPagamentoId(rs: java.sql.ResultSet): UUID? {
