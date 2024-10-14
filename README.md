@@ -69,6 +69,7 @@ Ordem de execução dos endpoints:
 8. GET Pedido/Listar Pedido
 
 ## Kubernetes
+A arquitetura local proposta em Kubernetes visa atender aos requisitos de escalabilidade, permitindo o aumento e diminuição de Pods de acordo com a demanda. Para isso, implementamos dois Deployments: um para a aplicação e outro para o banco de dados.
 
 A arquitetura local proposta em Kubernetes visa atender aos requisitos de escalabilidade, permitindo o aumento e diminuição de Pods de acordo com a demanda. Para isso, implementamos dois Deployments: um para a aplicação e outro para o banco de dados.
 
