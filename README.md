@@ -75,7 +75,15 @@ Para rodar o projeto no Kubernetes, utilize o seguinte comando:
 ```
 kubectl apply -R -f manifests/
 ```
+## Link do Miro
+https://miro.com/app/board/uXjVK5FMZfo=/
+
+## FASE 2
+
+## VIDEO
+https://www.youtube.com/watch?v=83lInn7reAA
 
 ## Arquitetura
 
-## Link do Miro
+
+
