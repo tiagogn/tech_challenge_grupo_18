@@ -35,6 +35,7 @@ spec:
                 configMapKeyRef:
                   name: lanchonete-configmap
                   key: PG_HOST
+                  value: "<Inserir RDS-ENDPOINT>"
             - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
