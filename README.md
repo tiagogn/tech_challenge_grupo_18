@@ -138,3 +138,9 @@ https://miro.com/app/board/uXjVK5FMZfo=/
 ## Link Video Fase 2
 
 https://youtube.com/watch?v=83lInn7reAA&feature=shared
+
+## Fase 3
+
+## Modelagem Banco de dados
+
+![Desenho-BD.png](Desenho-BD.png)
