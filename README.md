@@ -151,4 +151,4 @@ Como somos uma lanchonete de bairro, com uma demanda limitada de até 4 totens s
 
 ## Link Video Fase 3
 
-https://www.youtube.com/watch?v=3Lg5UirvPSA
+https://youtu.be/51NAMp4j6Jg?si=sozSrfZ2QZm2X3Tn
