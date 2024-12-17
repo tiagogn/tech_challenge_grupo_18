@@ -148,3 +148,7 @@ Como somos uma lanchonete de bairro, com uma demanda limitada de até 4 totens s
 #### Abaixo o desenho do nosso Schema:
 
 ![Desenho-BD.png](Desenho-BD.png)
+
+## Link Video Fase 3
+
+https://www.youtube.com/watch?v=3Lg5UirvPSA
