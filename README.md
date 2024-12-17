@@ -138,3 +138,13 @@ https://miro.com/app/board/uXjVK5FMZfo=/
 ## Link Video Fase 2
 
 https://youtube.com/watch?v=83lInn7reAA&feature=shared
+
+## Fase 3
+
+## Modelagem Banco de dados
+
+Como somos uma lanchonete de bairro, com uma demanda limitada de até 4 totens simultâneos para novos pedidos, e com o restante das requisições (relativas a cadastro e consulta de pedidos) sendo realizadas exclusivamente pelo quadro de funcionários, acreditamos que um banco de dados relacional é a solução ideal para o nosso cenário. Nosso modelo de dados é bem estruturado e definido, e, neste momento, não precisamos de escalabilidade elevada. Por isso, optamos por utilizar o banco de dados relacional RDS/Postgres, que atende bem às nossas necessidades atuais.
+
+#### Abaixo o desenho do nosso Schema:
+
+![Desenho-BD.png](Desenho-BD.png)
